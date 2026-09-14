@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proceso de Alquiler</title>
+
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="estiloIndex.css" rel="stylesheet">
+</head>
+<body>
+    
+<div class="container">
+    <main>
+    <div class="py-5 text-center">
+        <h2>Proceso de Alquiler</h2>
+        <p class="lead">Siga estos pasos para alquilar un vehículo. Complete sus datos personales y seleccione el método de pago para confirmar su reserva.</p>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-md-7 col-lg-8 mx-auto">
+        <h4 class="mb-3">Datos del Cliente y Reserva</h4>
+            <div class="row g-3">
+            <div class="col-sm-6">
+                <label for="firstName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="firstName" placeholder="" required>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="lastName" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" required>
+            </div>
+
+            <div class="col-12">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com" required>
+            </div>
+
+            <div class="col-12">
+                <label for="carSelect" class="form-label">Vehículo a Alquilar</label>
+                <select class="form-select" id="carSelect" required>
+                <option value="">Seleccione un auto...</option>
+                <option>Lamborghini</option>
+                <option>Mercedes-Benz</option>
+                <option>Rolls Royce</option>
+                <option>Ferrari</option>
+                <option>McLaren</option>
+                <option>Bugatti</option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label for="address" class="form-label">Dirección de Entrega</label>
+                <input type="text" class="form-control" id="address" placeholder="Av. Principal 123" required>
+            </div>
+            </div>
+
+            <hr class="my-4">
+
+            <h4 class="mb-3">Método de Pago</h4>
+
+            <div class="my-3">
+            <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                <label class="form-check-label" for="credit">Tarjeta de crédito</label>
+            </div>
+            <div class="form-check">
+                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="debit">Tarjeta de débito</label>
+            </div>
+            </div>
+
+            <div class="row gy-3">
+            <div class="col-md-6">
+                <label for="cardName" class="form-label">Nombre en la tarjeta</label>
+                <input type="text" class="form-control" id="cardName" placeholder="" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="cardNumber" class="form-label">Número de tarjeta</label>
+                <input type="text" class="form-control" id="cardNumber" placeholder="" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="cardExpiration" class="form-label">Vencimiento</label>
+                <input type="text" class="form-control" id="cardExpiration" placeholder="MM/AA" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="cardCvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cardCvv" placeholder="" required>
+            </div>
+            </div>
+
+            <hr class="my-4">
+
+            <button class="w-100 btnVer btn-lg" type="submit">Confirmar Reserva y Recibir Contrato</button>
+        </form>
+        </div>
+    </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; Autos Rentados</p>
+    </footer>
+</div>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

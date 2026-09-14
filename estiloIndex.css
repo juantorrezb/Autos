@@ -1,0 +1,89 @@
+/* ==========================================
+Estilos Generales
+   ========================================== */
+body {
+    background-color: #0f0f11;
+    color: #e4e4e4;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================
+Sección Hero (Banner Principal)
+   ========================================== */
+.bg-light {
+    background-color: #18181c !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bg-light h1 {
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.bg-light .lead {
+    color: #a0a0a0;
+}
+
+/* ==========================================
+Sección Clientes Satisfechos
+   ========================================== */
+.d-md-flex .bg-dark {
+    background: linear-gradient(145deg, #1c1c22, #141418) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.d-md-flex img {
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================
+Tarjetas del Catálogo (Autos)
+   ========================================== */
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.CuerpoTarjeta {
+    padding: 1.5rem;
+}
+
+.TextoTarjeta {
+    color: #d1d1d1;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+}
+
+/* Botón "Ver" estilo Premium */
+.btnVer {
+    background-color: transparent;
+    color: #c9a227;
+    border: 1px solid #c9a227;
+    padding: 0.4rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* ==========================================
+Pie de Página (Footer)
+   ========================================== */
+footer {
+    background-color: #09090b;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #a0a0a0 !important;
+}
+
+footer a {
+    color: #c9a227;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
