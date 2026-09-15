@@ -5,22 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Autos</title>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="estiloIndex.css">
 </head>
 
 <body>
+
     <body>
+    <!-- NUEVO MENÚ CON CARRITO -->
     <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">Autos Rentados</a>
             <div class="d-flex">
                 <a href="proceso.html" class="btn btn-outline-warning d-flex align-items-center gap-2">
-                    🛒 Carrito
+                    🛒 Carrito (<span id="contador-carrito">0</span>)
                 </a>
             </div>
         </div>
     </nav>
+
+    <!-- Aquí sigue tu código normal -->
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <!-- ... -->
     
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
@@ -37,7 +43,7 @@
     <div class="bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden rounded flex-fill">
         <div class="my-3 py-3">
             <h2 class="display-5">Clientes satisfechos</h2>
-            <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
+            <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>   
         </div>
         <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
     </div>
@@ -45,9 +51,9 @@
     <div class="bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden rounded flex-fill">
         <div class="my-3 p-3">
             <h2 class="display-5">Cliente satisfecho</h2>
-            <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
+            <p class="descripcion">"Muy buen servicio la verdad, muy recomendado esta pagina de ventas de autos."</p>
         </div>
-        <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
+        <img src="assets/clienteSatisfecho.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
     </div>
 </div>
     <div class="container my-5">
@@ -58,11 +64,9 @@
                 <div class="card shadow-sm">
                     <img src="assets/lambo.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 1.</p>
+                        <p class="TextoTarjeta">lamborghini urus color negro es un vehículo de lujo para eventos especiales.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -73,11 +77,9 @@
                 <div class="card shadow-sm">
                     <img src="assets/mercedes.jpeg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 2.</p>
+                        <p class="TextoTarjeta">mercedes benz gle color negro es una camioneta de lujo para uso exclusivo.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -88,11 +90,9 @@
                 <div class="card shadow-sm">
                     <img src="assets/rollsRoyce.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 3.</p>
+                        <p class="TextoTarjeta">rolls royce phantom  es una camioneta de lujo color plateado para eventos formales.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -103,11 +103,9 @@
                 <div class="card shadow-sm">
                     <img src="assets/ferrari.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 4.</p>
+                        <p class="TextoTarjeta">ferrari laferrari  es un superdeportivo italiano con un diseño aerodinámico y un motor V8 de alto rendimiento.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -118,11 +116,9 @@
                 <div class="card shadow-sm">
                     <img src="assets/Mclarenjpg.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 5.</p>
+                        <p class="TextoTarjeta">mclaren 720s es un superdeportivo británico con un diseño aerodinámico y un motor V8 de alto rendimiento.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -133,11 +129,9 @@
                 <div class="card shadow-sm">
                     <img src="assets/bugatti.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 6.</p>
+                        <p class="TextoTarjeta">bugatti chiron es un superdeportivo francés con un diseño aerodinámico y un motor W16 de alto rendimiento.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
-                            </div>
+                
                         </div>
                     </div>
                 </div>
@@ -149,9 +143,8 @@
     <footer class="text-muted py-5">
   <div class="container">
     <p class="float-end mb-1">
-      <a href="#">Back to top</a>
     </p>
-    <p class="mb-1">Texto que se ve abajo todo profesional &copy; Ronaldo la mejor wea, Juegen lol, los carreo malos</p>
+    <p class="mb-1">© 2026 autos rentados. Todos los derechos reservados.</p>
   </div>
 </footer>
 
