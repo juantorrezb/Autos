@@ -24,15 +24,18 @@
             <div class="col-sm-6">
                 <label for="firstName" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="firstName" placeholder="" required>
+                <div id="errorFirstName" class="text-danger mt-1" style="display: none;"></div>
             </div>
 
             <div class="col-sm-6">
                 <label for="lastName" class="form-label">Apellido</label>
                 <input type="text" class="form-control" id="lastName" placeholder="" required>
+                <div id="errorLastName" class="text-danger mt-1" style="display: none;"></div>
             </div>
 
             <div class="col-12">
                 <label for="carSelect" class="form-label">Vehículo a Alquilar</label>
+                <div id="errorCarType" class="text-danger mt-1" style="display: none;"></div>
                 <select class="form-select" id="carSelect" required>
                 <option value="">Seleccione un auto...</option>
                 <option>Lamborghini</option>
@@ -47,32 +50,37 @@
             <div class="col-12">
                 <label for="address" class="form-label">Dirección de Entrega</label>
                 <input type="text" class="form-control" id="address" placeholder="Av. Principal 123" required>
+                <div id="errorAddress" class="text-danger mt-1" style="display: none;"></div>
             </div>
             </div>
 
             <hr class="my-4">
 
-            <h4 class="mb-3">Método de Pago</h4>
+            <h4 class="mb-3">Datos de pago</h4>
 
             <div class="row gy-3">
             <div class="col-md-6">
                 <label for="cardName" class="form-label">Nombre en la tarjeta</label>
                 <input type="text" class="form-control" id="cardName" placeholder="" required>
+                <div id="errorCardName" class="text-danger mt-1" style="display: none;"></div>
             </div>
 
             <div class="col-md-6">
                 <label for="cardNumber" class="form-label">Número de tarjeta</label>
                 <input type="text" class="form-control" id="cardNumber" placeholder="" required>
+                <div id="errorCardNumber" class="text-danger mt-1" style="display: none;"></div>
             </div>
 
             <div class="col-md-3">
                 <label for="cardExpiration" class="form-label">Vencimiento</label>
                 <input type="text" class="form-control" id="cardExpiration" placeholder="MM/AA" required>
+                <div id="errorCardExpiration" class="text-danger mt-1" style="display: none;"></div>
             </div>
 
             <div class="col-md-3">
                 <label for="cardCvv" class="form-label">CVV</label>
                 <input type="text" class="form-control" id="cardCvv" placeholder="" required>
+                <div id="errorCardCvv" class="text-danger mt-1" style="display: none;"></div>
             </div>
             </div>
 
@@ -90,6 +98,6 @@
 </div>
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="procesoControler.js"></script>
+    <script src="js/procesoControler.js"></script>
 </body>
 </html>

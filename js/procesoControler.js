@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Obtener referencias a los elementos del formulario
     const inputFirstName = document.getElementById("firstName")
     const inputLastName = document.getElementById("lastName")
     const inputAddress = document.getElementById("address")
@@ -11,7 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardNumberRegex = /^[0-9]{16}$/
     const cardExpirationRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/
     const cardCvvRegex = /^[0-9]{3}$/
-
+    //Obtener las referencias a los elementos de error
+    const errorPrimerNombre = document.getElementById("errorFirstName")
+    const errorApellido = document.getElementById("errorLastName")
+    const errorTipoDeAuto = document.getElementById("errorCarType")
+    const errorDireccion = document.getElementById("errorAddress")
+    const errorNombreTarjeta = document.getElementById("errorCardName")
+    const errorNumeroTarjeta = document.getElementById("errorCardNumber")
+    const errorVencimientoTarjeta = document.getElementById("errorCardExpiration")
+    const errorCVVTarjeta = document.getElementById("errorCardCvv")
 
     // Helper: Limpiar espacios en blanco
     function getInputValue(inputElement) {
@@ -24,9 +33,25 @@ document.addEventListener('DOMContentLoaded', () => {
         return {value : selectElement.value,                    //El valor de la opcion
             text: selectedOption ? selectedOption.text : ""     //El texto visible de la opcion
         }
-
-        
     }
+//Funcion para limpiar el error visual de los campos especificos
+    function cleanErrorMensaje(errorElement){
+        if(errorElement){
+            errorElement.textContent = ""
+            errorElement.style.display = "none"
+        }
+    }
+    // Escuchar cambios en tiempo real para limpiar los mensajes de error
+    inputFirstName.addEventListener("input",() => cleanErrorMensaje(errorPrimerNombre))
+    inputLastName.addEventListener("input",() => cleanErrorMensaje(errorApellido))
+    carTypeSelect.addEventListener("input",() => cleanErrorMensaje(errorTipoDeAuto))
+    inputAddress.addEventListener("input",() => cleanErrorMensaje(errorDireccion))
+    cardName.addEventListener("input",() => cleanErrorMensaje(errorNombreTarjeta))
+    cardNumber.addEventListener("input",() => cleanErrorMensaje(errorNumeroTarjeta))
+    cardExpiration.addEventListener("input",() => cleanErrorMensaje(errorVencimientoTarjeta))
+    cardCvv.addEventListener("input",() => cleanErrorMensaje(errorCVVTarjeta))
+
+
     function handleButtonClick(event){
 
         event.preventDefault();
@@ -50,34 +75,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Validar datos
     if(!firstName){
+        errorPrimerNombre.textContent = "Ingrese un nombre valido."
+        errorPrimerNombre.style.display = "block"
         console.error("Error: Ingrese un nombre valido.")
         return
     }
     if(!lastName){
+        errorApellido.textContent = "Ingrese un apellido valido."
+        errorApellido.style.display = "block"
         console.error("Error: Ingrese un apellido valido.")
         return
     }
-    if(!address){
-        console.error("Error: Ingrese una dirección valida.")
-        return
-    }
     if(carType.value==""){
+        errorTipoDeAuto.textContent = "Ingrese un tipo de auto valido."
+        errorTipoDeAuto.style.display = "block"
         console.error("Error: Ingrese un tipo de auto valido.")
         return
     }
+    if(!address){
+        errorDireccion.textContent = "Ingrese una direccion valida."
+        errorDireccion.style.display = "block"
+        console.error("Error: Ingrese una direccion valida.")
+        return
+    }
     if(!cardNameValue){
+        errorNombreTarjeta.textContent = "Ingrese un nombre en la tarjeta valido."
+        errorNombreTarjeta.style.display = "block"
         console.error("Error: Ingrese un nombre en la tarjeta valido.")
         return
     }
     if(!cardNumberRegex.test(cardNumberValue)){
+        errorNumeroTarjeta.textContent = "Ingrese un numero de tarjeta valido (16 digitos)."
+        errorNumeroTarjeta.style.display = "block"
         console.error("Error: Ingrese un numero de tarjeta valido (16 digitos).")
         return
     }
     if(!cardExpirationRegex.test(cardExpirationValue)){
+        errorVencimientoTarjeta.textContent = "Ingrese una fecha de expiracion valida (MM/YY)."
+        errorVencimientoTarjeta.style.display = "block"
         console.error("Error: Ingrese una fecha de expiracion valida (MM/YY).")
         return
     }
     if(!cardCvvRegex.test(cardCvvValue)){
+        errorCVVTarjeta.textContent = "Ingrese un CVV valido (3 digitos)."
+        errorCVVTarjeta.style.display = "block"
         console.error("Error: Ingrese un CVV valido (3 digitos).")
         return
     }
