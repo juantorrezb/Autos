@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return {value : selectElement.value,                    //El valor de la opcion
             text: selectedOption ? selectedOption.text : ""     //El texto visible de la opcion
         }
+
+        
     }
     function handleButtonClick(event){
 

@@ -69,6 +69,15 @@ Tarjetas del Catálogo (Autos)
     border-radius: 8px;
     font-weight: 600;
 }
+/* boton de Inicio de sesion estilo premiun */
+.btnInicio {
+    background-color: transparent;
+    color: #c9a227;
+    border: 1px solid #c9a227;
+    padding: 0.4rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
 
 /* ==========================================
 Pie de Página (Footer)
