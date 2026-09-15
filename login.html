@@ -2,29 +2,104 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inicio de Sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso y Registro - Autos Rentados</title>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="estiloIndex.css">
 </head>
-<body>
-    <div class="container mt-5">
-        <h2>Iniciar Sesión</h2>
-        <form id="formLogin">
-            <div class="mb-3">
-                <label for="correo" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo">
-                <div id="errorCorreo" class="text-danger mt-1" style="display: none;"></div>
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="Index.html">Autos Rentados</a>
+            <a href="Index.html" class="btn btn-outline-light btn-sm">Volver a la Tienda</a>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+
+                        <!-- PESTAÑAS TOGGLE -->
+                        <ul class="nav nav-pills nav-justified mb-4" id="authTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="tab-login" data-bs-toggle="pill" data-bs-target="#panel-login" type="button">Iniciar Sesión</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="tab-registro" data-bs-toggle="pill" data-bs-target="#panel-registro" type="button">Registrarse</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <!-- FORMULARIO 1: INICIAR SESIÓN -->
+                            <div class="tab-pane fade show active" id="panel-login" role="tabpanel">
+                                <h4 class="mb-3 text-center fw-bold">Iniciar Sesión</h4>
+                                <form id="formLogin" novalidate>
+                                    <div class="mb-3">
+                                        <label for="correo" class="form-label">Correo Electrónico</label>
+                                        <input type="email" class="form-control" id="correo" placeholder="ejemplo@duoc.cl" required>
+                                        <div id="errorCorreo" class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="password" placeholder="4 a 10 caracteres" required>
+                                        <div id="errorPassword" class="invalid-feedback"></div>
+                                    </div>
+                                    <button type="submit" class="btn btn-warning w-100 py-2 fw-semibold">Ingresar</button>
+                                </form>
+                            </div>
+
+                            <!-- FORMULARIO 2: REGISTRO DE USUARIO -->
+                            <div class="tab-pane fade" id="panel-registro" role="tabpanel">
+                                <h4 class="mb-3 text-center fw-bold">Crear Cuenta</h4>
+                                <form id="formRegistro" novalidate>
+                                    <div class="mb-3">
+                                        <label for="regRun" class="form-label">RUN (sin puntos ni guion)</label>
+                                        <input type="text" class="form-control" id="regRun" placeholder="19011022K" maxlength="9" required>
+                                        <div id="errorRegRun" class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="row g-2 mb-3">
+                                        <div class="col-sm-6">
+                                            <label for="regNombre" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="regNombre" placeholder="Tu nombre" required>
+                                            <div id="errorRegNombre" class="invalid-feedback"></div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="regApellido" class="form-label">Apellidos</label>
+                                            <input type="text" class="form-control" id="regApellido" placeholder="Tus apellidos" required>
+                                            <div id="errorRegApellido" class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="regCorreo" class="form-label">Correo Electrónico</label>
+                                        <input type="email" class="form-control" id="regCorreo" placeholder="nombre@duoc.cl" required>
+                                        <div id="errorRegCorreo" class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="regPassword" class="form-label">Contraseña (4 a 10 caracteres)</label>
+                                        <input type="password" class="form-control" id="regPassword" required>
+                                        <div id="errorRegPassword" class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="regPasswordConfirm" class="form-label">Confirmar Contraseña</label>
+                                        <input type="password" class="form-control" id="regPasswordConfirm" required>
+                                        <div id="errorRegPasswordConfirm" class="invalid-feedback"></div>
+                                    </div>
+                                    <button type="submit" class="btn btn-dark w-100 py-2 fw-semibold">Registrarse</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password">
-                <div id="errorPassword" class="text-danger mt-1" style="display: none;"></div>
-            </div>
-            <a href="Index.html" class="btnInicio btn-primary btnInicio">Ingresar</a>
-            
-        </form>
+        </div>
     </div>
-    
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/validaciones.js"></script>
 </body>
 </html>
