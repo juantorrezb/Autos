@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalle del Vehículo</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="estiloIndex.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVBAR CON CARRITO -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="Index.html">Autos Rentados</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="Index.html" class="btn btn-outline-light btn-sm">Volver al Catálogo</a>
+                <a href="proceso.html" class="btn btn-warning position-relative">
+                    🛒 Carrito 
+                    <span id="contador-carrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row align-items-center g-5" id="contenedor-detalle">
+            <!-- Renderizado dinámico desde JS -->
+        </div>
+    </div>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/carrito.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            const idAuto = params.get('id');
+
+            const vehiculos = [
+                { id: "lambo", nombre: "Lamborghini Huracán", precio: 500000, desc: "Superdeportivo con motor V10 atmosférico, tracción integral y aceleración de 0 a 100 km/h en 3.2 segundos.", img: "assets/lambo.jpg" },
+                { id: "rolls", nombre: "Rolls Royce Phantom", precio: 800000, desc: "El epítome del lujo y la comodidad. Conducción suave y acabados artesanales de primer nivel.", img: "assets/rollsRoyce.jpg" },
+                { id: "bugatti", nombre: "Bugatti Chiron", precio: 900000, desc: "Hiperdeportivo exclusivo con motor W16 quad-turbo de 1500 CV.", img: "assets/bugatti.jpg" },
+                { id: "ferrari", nombre: "Ferrari 488", precio: 600000, desc: "Diseño aerodinámico italiano, motor V8 turboalimentado con respuesta instantánea.", img: "assets/ferrari.jpg" },
+                { id: "mclaren", nombre: "McLaren 720S", precio: 550000, desc: "Estructura de fibra de carbono ultra liviana con rendimiento de pista homologado para calle.", img: "assets/Mclarenjpg.jpg" },
+                { id: "mercedes", nombre: "Mercedes-Benz Clase S", precio: 300000, desc: "Elegancia ejecutiva, tecnología de punta y máxima seguridad en ruta.", img: "assets/mercedes.jpeg" }
+            ];
+
+            const auto = vehiculos.find(v => v.id === idAuto) || vehiculos[0];
+            const contenedor = document.getElementById("contenedor-detalle");
+
+            contenedor.innerHTML = `
+                <div class="col-md-6 text-center">
+                    <img src="${auto.img}" class="img-fluid rounded shadow" alt="${auto.nombre}">
+                </div>
+                <div class="col-md-6">
+                    <h1 class="fw-bold mb-3">${auto.nombre}</h1>
+                    <p class="fs-5 text-muted">${auto.desc}</p>
+                    <h2 class="text-warning fw-bold my-4">$${auto.precio.toLocaleString('es-CL')} / día</h2>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-warning btn-lg px-4" onclick="agregarAlCarrito('${auto.nombre}', ${auto.precio})">Añadir al Carrito</button>
+                        <a href="proceso.html" class="btn btn-dark btn-lg px-4">Ir a Pagar</a>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

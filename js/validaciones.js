@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-
+    
+    // ==========================================
+    // 1. VALIDACIÓN DE INICIO DE SESIÓN
+    // ==========================================
     const formLogin = document.getElementById("formLogin");
 
     if (formLogin) {
@@ -14,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             let esValido = true;
 
+            // Validación de Correo
             if (correo === "") {
                 errorCorreo.textContent = "El correo es requerido.";
                 errorCorreo.style.display = "block";
@@ -30,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 errorCorreo.style.display = "none";
             }
 
+            // Validación de Contraseña
             if (password === "") {
                 errorPassword.textContent = "La contraseña es requerida.";
                 errorPassword.style.display = "block";
@@ -44,11 +49,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (esValido) {
                 alert("Validación exitosa. Iniciando sesión...");
+                window.location.href = "Index.html";
             }
         });
     }
 
-
+    // ==========================================
+    // 2. VALIDACIÓN DEL PROCESO DE ALQUILER
+    // ==========================================
     const formularioReserva = document.getElementById("formularioReserva");
 
     if (formularioReserva) {
@@ -101,6 +109,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // ==========================================
+    // 3. SELECCIÓN AUTOMÁTICA DESDE EL LOCALSTORAGE
+    // ==========================================
     const selectVehiculo = document.getElementById("carSelect");
     
     if (selectVehiculo) {

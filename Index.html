@@ -5,144 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Autos</title>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="estiloIndex.css">
 </head>
-
 <body>
 
-    <body>
-    <!-- NUEVO MENÚ CON CARRITO -->
-    <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm">
+    <!-- MENÚ SUPERIOR DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Autos Rentados</a>
-            <div class="d-flex">
-                <a href="proceso.html" class="btn btn-outline-warning d-flex align-items-center gap-2">
+            <a class="navbar-brand fw-bold" href="Index.html">Autos Rentados</a>
+            <div class="d-flex align-items-center gap-3">
+                <a class="text-white text-decoration-none" href="login.html">Iniciar Sesión</a>
+                <a href="proceso.html" class="btn btn-outline-warning d-flex align-items-center gap-2 position-relative">
                     🛒 Carrito (<span id="contador-carrito">0</span>)
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Aquí sigue tu código normal -->
+    <!-- SECCIÓN HERO PRINCIPAL -->
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <!-- ... -->
-    
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1>Autos rentados</h1>
-        <p class="lead fw-normal">Somos una empresa en ascenso dentro del mercado de autos alquilados
-        para eventos con una trayectoria de éxito entre distintas personalidades de renombre nacional.</p>
-    </div>
-    <div class="product-device shadow-sm d-none d-md-block"></div>
-    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-</div>
-
-
-<div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3 gap-4 container">
-    <div class="bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden rounded flex-fill">
-        <div class="my-3 py-3">
-            <h2 class="display-5">Clientes satisfechos</h2>
-            <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1>Autos rentados</h1>
+            <p class="lead fw-normal">Somos una empresa en ascenso dentro del mercado de autos alquilados para eventos con una trayectoria de éxito entre distintas personalidades de renombre nacional.</p>
         </div>
-        <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
     </div>
 
-    <div class="bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden rounded flex-fill">
-        <div class="my-3 p-3">
-            <h2 class="display-5">Cliente satisfecho</h2>
-            <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
+    <!-- TESTIMONIOS -->
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3 gap-4 container">
+        <div class="bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden rounded flex-fill">
+            <div class="my-3 py-3">
+                <h2 class="display-5">Clientes satisfechos</h2>
+                <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
+            </div>
+            <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
         </div>
-        <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
+
+        <div class="bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden rounded flex-fill">
+            <div class="my-3 p-3">
+                <h2 class="display-5">Cliente satisfecho</h2>
+                <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
+            </div>
+            <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
+        </div>
     </div>
-</div>
+
+    <!-- GRILLA DE PRODUCTOS -->
     <div class="container my-5">
         <div class="row g-4">
 
-            <!-- Tarjeta 1 -->
+            <!-- Tarjeta 1: Lamborghini -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="assets/lambo.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
+                    <img src="assets/lambo.jpg" class="ImagenTarjeta" alt="Lamborghini" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 1.</p>
+                        <h5 class="fw-bold mt-2">Lamborghini Huracán</h5>
+                        <p class="TextoTarjeta">Superdeportivo italiano con motor V10.</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
+                                <a href="detalle.html?id=lambo" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tarjeta 2 -->
+            <!-- Tarjeta 2: Mercedes-Benz -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="assets/mercedes.jpeg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
+                    <img src="assets/mercedes.jpeg" class="ImagenTarjeta" alt="Mercedes-Benz" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 2.</p>
+                        <h5 class="fw-bold mt-2">Mercedes-Benz Clase S</h5>
+                        <p class="TextoTarjeta">Confort ejecutivo y máxima seguridad.</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
+                                <a href="detalle.html?id=mercedes" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tarjeta 3 -->
+            <!-- Tarjeta 3: Rolls Royce -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="assets/rollsRoyce.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
+                    <img src="assets/rollsRoyce.jpg" class="ImagenTarjeta" alt="Rolls Royce" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 3.</p>
+                        <h5 class="fw-bold mt-2">Rolls Royce Phantom</h5>
+                        <p class="TextoTarjeta">El máximo estándar en lujo y exclusividad.</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
+                                <a href="detalle.html?id=rolls" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tarjeta 4 (Pasa automáticamente abajo) -->
+            <!-- Tarjeta 4: Ferrari -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="assets/ferrari.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
+                    <img src="assets/ferrari.jpg" class="ImagenTarjeta" alt="Ferrari" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 4.</p>
+                        <h5 class="fw-bold mt-2">Ferrari 488</h5>
+                        <p class="TextoTarjeta">Velocidad, sonido icónico y diseño deportivo.</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
+                                <a href="detalle.html?id=ferrari" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tarjeta 5 -->
+            <!-- Tarjeta 5: McLaren -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="assets/Mclarenjpg.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
+                    <img src="assets/Mclarenjpg.jpg" class="ImagenTarjeta" alt="McLaren" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 5.</p>
+                        <h5 class="fw-bold mt-2">McLaren 720S</h5>
+                        <p class="TextoTarjeta">Estructura ultraligera de fibra de carbono.</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
+                                <a href="detalle.html?id=mclaren" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tarjeta 6 -->
+            <!-- Tarjeta 6: Bugatti -->
             <div class="col-md-4">
                 <div class="card shadow-sm">
-                    <img src="assets/bugatti.jpg" class="ImagenTarjeta" alt="Auto" height="225" style="object-fit: cover;">
+                    <img src="assets/bugatti.jpg" class="ImagenTarjeta" alt="Bugatti" height="225" style="object-fit: cover;">
                     <div class="CuerpoTarjeta">
-                        <p class="TextoTarjeta">Descripción del vehículo 6.</p>
+                        <h5 class="fw-bold mt-2">Bugatti Chiron</h5>
+                        <p class="TextoTarjeta">Potencia extrema con motor W16 quad-turbo.</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btnVer btn-sm btn-outline-secondary">Ver</button>
+                                <a href="detalle.html?id=bugatti" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
                             </div>
                         </div>
                     </div>
@@ -152,15 +154,18 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer class="text-muted py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Texto que se ve abajo todo profesional &copy; Ronaldo la mejor wea, Juegen lol, los carreo malos</p>
-  </div>
-</footer>
+        <div class="container">
+            <p class="float-end mb-1">
+                <a href="#">Back to top</a>
+            </p>
+            <p class="mb-1">&copy; Autos Rentados - Calidad y Confort para tus Eventos</p>
+        </div>
+    </footer>
 
+    <!-- SCRIPTS -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/carrito.js"></script>
 </body>
 </html>

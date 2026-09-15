@@ -9,87 +9,151 @@
     <link href="estiloIndex.css" rel="stylesheet">
 </head>
 <body>
-    
-<div class="container">
-    <main>
-    <div class="py-5 text-center">
-        <h2>Proceso de Alquiler</h2>
-        <p class="lead">Siga estos pasos para alquilar un vehículo. Complete sus datos personales y seleccione el método de pago para confirmar su reserva.</p>
-    </div>
 
-    <div class="row g-5">
-        <div class="col-md-7 col-lg-8 mx-auto">
-        <h4 class="mb-3">Datos del Cliente y Reserva</h4>
-            <div class="row g-3">
-            <div class="col-sm-6">
-                <label for="firstName" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" required>
+    <!-- BARRA SUPERIOR -->
+    <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="Index.html">Autos Rentados</a>
+            <div class="d-flex">
+                <a href="Index.html" class="btn btn-outline-light btn-sm me-2">Volver al Catálogo</a>
+                <span class="navbar-text text-warning fw-semibold">
+                    🛒 Carrito (<span id="contador-carrito">0</span>)
+                </span>
             </div>
-
-            <div class="col-sm-6">
-                <label for="lastName" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" required>
-            </div>
-
-            <div class="col-12">
-                <label for="carSelect" class="form-label">Vehículo a Alquilar</label>
-                <select class="form-select" id="carSelect" required>
-                <option value="">Seleccione un auto...</option>
-                <option>Lamborghini</option>
-                <option>Mercedes-Benz</option>
-                <option>Rolls Royce</option>
-                <option>Ferrari</option>
-                <option>McLaren</option>
-                <option>Bugatti</option>
-                </select>
-            </div>
-
-            <div class="col-12">
-                <label for="address" class="form-label">Dirección de Entrega</label>
-                <input type="text" class="form-control" id="address" placeholder="Av. Principal 123" required>
-            </div>
-            </div>
-
-            <hr class="my-4">
-
-            <h4 class="mb-3">Método de Pago</h4>
-
-            <div class="row gy-3">
-            <div class="col-md-6">
-                <label for="cardName" class="form-label">Nombre en la tarjeta</label>
-                <input type="text" class="form-control" id="cardName" placeholder="" required>
-            </div>
-
-            <div class="col-md-6">
-                <label for="cardNumber" class="form-label">Número de tarjeta</label>
-                <input type="text" class="form-control" id="cardNumber" placeholder="" required>
-            </div>
-
-            <div class="col-md-3">
-                <label for="cardExpiration" class="form-label">Vencimiento</label>
-                <input type="text" class="form-control" id="cardExpiration" placeholder="MM/AA" required>
-            </div>
-
-            <div class="col-md-3">
-                <label for="cardCvv" class="form-label">CVV</label>
-                <input type="text" class="form-control" id="cardCvv" placeholder="" required>
-            </div>
-            </div>
-
-            <hr class="my-4">
-
-            <button class="w-100 btnVer btn-lg" type="submit" id="btnSubmit">Confirmar Reserva y Recibir Contrato</button>
-        </form>
         </div>
+    </nav>
+
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h2>Proceso de Alquiler</h2>
+                <p class="lead">Siga estos pasos para alquilar un vehículo. Complete sus datos personales y seleccione el método de pago para confirmar su reserva.</p>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-md-8 mx-auto">
+
+                    <!-- TABLA RESUMEN DEL CARRITO (LOCALSTORAGE) -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Vehículos en la Reserva</h5>
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="vaciarCarrito()">Vaciar Carrito</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Vehículo</th>
+                                            <th>Precio Diario</th>
+                                            <th>Cantidad</th>
+                                            <th>Subtotal</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabla-carrito-body">
+                                        <!-- Se llena con js/carrito.js -->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="fw-bold table-light">
+                                            <td colspan="3" class="text-end">Total Reserva:</td>
+                                            <td id="total-carrito" colspan="2">$0</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORMULARIO DE RESERVA Y PAGO -->
+                    <form id="formularioReserva">
+                        <h4 class="mb-3">Datos del Cliente y Reserva</h4>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="" required>
+                                <div class="invalid-feedback">El nombre es requerido.</div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="" required>
+                                <div class="invalid-feedback">El apellido es requerido.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="email" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="email" placeholder="usuario@duoc.cl" required>
+                                <div class="invalid-feedback">Ingrese un correo válido (@duoc.cl, @profesor.duoc.cl o @gmail.com).</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="carSelect" class="form-label">Vehículo Principal a Alquilar</label>
+                                <select class="form-select" id="carSelect" required>
+                                    <option value="">Seleccione un auto...</option>
+                                    <option value="Lamborghini Huracán">Lamborghini Huracán</option>
+                                    <option value="Mercedes-Benz Clase S">Mercedes-Benz Clase S</option>
+                                    <option value="Rolls Royce Phantom">Rolls Royce Phantom</option>
+                                    <option value="Ferrari 488">Ferrari 488</option>
+                                    <option value="McLaren 720S">McLaren 720S</option>
+                                    <option value="Bugatti Chiron">Bugatti Chiron</option>
+                                </select>
+                                <div class="invalid-feedback">Debe seleccionar un auto.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address" class="form-label">Dirección de Entrega</label>
+                                <input type="text" class="form-control" id="address" placeholder="Av. Principal 123" required>
+                                <div class="invalid-feedback">La dirección de entrega es requerida.</div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h4 class="mb-3">Método de Pago</h4>
+
+                        <div class="row gy-3">
+                            <div class="col-md-6">
+                                <label for="cardName" class="form-label">Nombre en la tarjeta</label>
+                                <input type="text" class="form-control" id="cardName" placeholder="" required>
+                                <div class="invalid-feedback">El nombre en la tarjeta es requerido.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="cardNumber" class="form-label">Número de tarjeta (16 dígitos)</label>
+                                <input type="text" class="form-control" id="cardNumber" placeholder="1234567812345678" maxlength="16" required>
+                                <div class="invalid-feedback">Debe ingresar los 16 dígitos numéricos.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="cardExpiration" class="form-label">Vencimiento</label>
+                                <input type="text" class="form-control" id="cardExpiration" placeholder="MM/AA" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="cardCvv" class="form-label">CVV (3 dígitos)</label>
+                                <input type="text" class="form-control" id="cardCvv" placeholder="123" maxlength="3" required>
+                                <div class="invalid-feedback">Debe ingresar exactamente 3 números.</div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <button class="w-100 btnVer btn-lg" type="submit" id="btnSubmit">Confirmar Reserva y Recibir Contrato</button>
+                    </form>
+
+                </div>
+            </div>
+        </main>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; Autos Rentados</p>
+        </footer>
     </div>
-    </main>
 
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; Autos Rentados</p>
-    </footer>
-</div>
-
+    <!-- SCRIPTS -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="procesoControler.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/validaciones.js"></script>
 </body>
 </html>
