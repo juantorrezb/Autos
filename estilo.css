@@ -96,3 +96,218 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+/* ==========================================
+   Panel de Administración (Sidebar & Admin)
+   ========================================== */
+
+.admin-wrapper {
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background-color: #141418;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar .nav-link {
+    color: #a0a0a0;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-bottom: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Estado activo del menú en Dorado */
+.sidebar .nav-link.active {
+    background-color: #c9a227 !important;
+    color: #0f0f11 !important;
+    font-weight: 700;
+}
+
+/* Color Dorado Utilitario */
+.text-gold {
+    color: #c9a227 !important;
+}
+
+/* Ajustes de Tabla en modo oscuro */
+.table-dark {
+    --bs-table-bg: #1e1e1e;
+    --bs-table-border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dropdown-menu-dark {
+    background-color: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================
+   1. Estilos Generales
+   ========================================== */
+body {
+    background-color: #0f0f11;
+    color: #e4e4e4;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Colores Utilitarios */
+.texto-dorado {
+    color: #c9a227 !important;
+}
+
+/* ==========================================
+   2. Botones de la Aplicación
+   ========================================== */
+/* Botón Principal (Dorado) */
+.boton-dorado {
+    background-color: transparent;
+    color: #c9a227;
+    border: 1px solid #c9a227;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.boton-dorado:hover {
+    background-color: #c9a227;
+    color: #0f0f11;
+}
+
+/* Botón "Ver" */
+.boton-ver {
+    background-color: transparent;
+    color: #c9a227;
+    border: 1px solid #c9a227;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.boton-ver:hover {
+    background-color: rgba(201, 162, 39, 0.15);
+}
+
+/* Botones con Ícono (Editar / Eliminar) */
+.boton-icono {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e4e4e4;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.boton-icono.editar:hover {
+    background-color: rgba(201, 162, 39, 0.15);
+    color: #c9a227;
+    border-color: #c9a227;
+}
+
+.boton-icono.eliminar:hover {
+    background-color: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* ==========================================
+   3. Panel de Administración y Menú Lateral
+   ========================================== */
+.contenedor-panel {
+    min-height: 100vh;
+}
+
+.menu-lateral {
+    width: 280px;
+    background-color: #141418;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.menu-lateral .nav-link {
+    color: #a0a0a0;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-bottom: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.menu-lateral .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.menu-lateral .nav-link.activo {
+    background-color: #c9a227 !important;
+    color: #0f0f11 !important;
+    font-weight: 700;
+}
+
+/* ==========================================
+   4. Tarjetas del Catálogo
+   ========================================== */
+.tarjeta-auto {
+    background-color: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-auto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.contenido-tarjeta {
+    padding: 1.5rem;
+}
+
+.detalles-auto {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ==========================================
+   5. Ventana Modal y Formularios
+   ========================================== */
+.ventana-modal {
+    background-color: #18181c;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* Foco de los Inputs */
+.form-control:focus, 
+.form-select:focus {
+    background-color: #0f0f11 !important;
+    color: #ffffff !important;
+    border-color: #c9a227 !important;
+    box-shadow: 0 0 0 0.25rem rgba(201, 162, 39, 0.25) !important;
+}
+
+/* ==========================================
+   6. Pie de Página (Footer)
+   ========================================== */
+footer {
+    background-color: #09090b;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #a0a0a0 !important;
+}
+
+footer a {
+    color: #c9a227;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

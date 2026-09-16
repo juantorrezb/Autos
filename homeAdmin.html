@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Tu archivo CSS General -->
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<div class="d-flex admin-wrapper">
+    <!-- Sidebar / Barra Lateral -->
+    <aside class="sidebar d-flex flex-column flex-shrink-0 p-3">
+        <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+            <i class="bi bi-shield-lock-fill text-gold fs-3 me-2"></i>
+            <span class="fs-4 fw-bold text-white">Panel Admin</span>
+        </a>
+        <hr class="border-secondary">
+        
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="homeAdmin.html" class="nav-link active" aria-current="page">
+                    <i class="bi bi-house-door me-2"></i>
+                    Inicio
+                </a>
+            </li>
+            <li>
+                <a href="catalogoAdmin.html" class="nav-link">
+                    <i class="bi bi-car-front me-2"></i>
+                    Catálogo Autos
+                </a>
+            </li>
+            <li>
+                <a href="adminClientes.html" class="nav-link">
+                    <i class="bi bi-people me-2"></i>
+                    Clientes
+                </a>
+            </li>
+        </ul>
+        
+        <hr class="border-secondary">
+        
+        <!-- Opciones de Usuario / Salida -->
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle fs-4 me-2 text-gold"></i>
+                <strong>Administrador</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Contenido Principal / Dashboard -->
+    <main class="main-content flex-grow-1 p-4">
+        <!-- Header Superior -->
+        <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
+            <h1 class="h3 fw-bold text-white m-0">Resumen General</h1>
+            <button class="btnInicio"><i class="bi bi-plus-lg me-1"></i> Nuevo Auto</button>
+        </header>
+
+        <!-- Tarjetas de Métricas -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-secondary small">Autos Disponibles</span>
+                            <h3 class="text-white mt-1 mb-0">24</h3>
+                        </div>
+                        <i class="bi bi-car-front text-gold fs-1"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-secondary small">Clientes Registrados</span>
+                            <h3 class="text-white mt-1 mb-0">42</h3>
+                        </div>
+                        <i class="bi bi-people text-gold fs-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Datos -->
+        <div class="card p-3">
+            <h5 class="text-white mb-3">Últimas Reservas</h5>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="text-gold">
+                            <th>#</th>
+                            <th>Cliente</th>
+                            <th>Vehículo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Carlos Pérez</td>
+                            <td>Sedán Premium</td>
+                            <td><span class="badge bg-success">Confirmado</span></td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>María Gómez</td>
+                            <td>SUV Familiar</td>
+                            <td><span class="badge bg-warning text-dark">Pendiente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- JS de Bootstrap -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
