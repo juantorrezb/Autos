@@ -3,22 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración - Catálogo de Vehículos</title>
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="estilo.css">
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
 
 <div class="d-flex admin-wrapper">
-    <!-- Sidebar / Barra Lateral -->
     <aside class="sidebar d-flex flex-column flex-shrink-0 p-3">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
             <i class="bi bi-shield-lock-fill text-gold fs-3 me-2"></i>
@@ -34,7 +26,7 @@
                 </a>
             </li>
             <li>
-                <a href="adminCatalogo.html" class="nav-link active" aria-current="page">
+                <a href="catalogoAdmin.html" class="nav-link active" aria-current="page">
                     <i class="bi bi-car-front me-2"></i>
                     Catálogo Autos
                 </a>
@@ -43,6 +35,13 @@
                 <a href="#" class="nav-link">
                     <i class="bi bi-people me-2"></i>
                     Clientes
+                </a>
+            </li>
+            <hr class="border-secondary my-2">
+            <li>
+                <a href="Index.html" class="nav-link text-warning">
+                    <i class="bi bi-arrow-left-circle me-2"></i>
+                    Volver a Tienda
                 </a>
             </li>
         </ul>
@@ -55,16 +54,12 @@
                 <strong>Administrador</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
-                <li><a class="dropdown-item" href="#">Configuración</a></li>
-                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="login.html">Cerrar Sesión</a></li>
             </ul>
         </div>
     </aside>
 
-    <!-- Contenido Principal / Catálogo Admin -->
     <main class="main-content flex-grow-1 p-4">
-        <!-- Encabezado con Botón Modal -->
         <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
             <div>
                 <h1 class="h3 fw-bold text-white m-0">Gestión del Catálogo</h1>
@@ -75,26 +70,24 @@
             </button>
         </header>
 
-        <!-- Tarjetas de Vehículos -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-            <!-- Vehículo 1 -->
             <div class="col">
                 <div class="card h-100">
                     <div class="position-relative">
-                        <img src="assets/Mercedes-Benz C-Class.jpg" class="card-img-top object-fit-cover" alt="Auto" height="180">
+                        <img src="../assets/mercedes.jpeg" class="card-img-top object-fit-cover" alt="Mercedes-Benz" height="180">
                         <span class="badge bg-success position-absolute top-0 end-0 m-3">Disponible</span>
                     </div>
-                    <div class="CuerpoTarjeta d-flex flex-column justify-content-between">
+                    <div class="CuerpoTarjeta d-flex flex-column justify-content-between p-3">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="text-gold fw-bold">ID: #AUTO-001</span>
-                                <span class="text-white fw-bold">$45,000/h</span>
+                                <span class="text-gold fw-bold">ID: #AUT-001</span>
+                                <span class="text-white fw-bold">$300.000/d</span>
                             </div>
-                            <h5 class="text-white fw-bold">Mercedes-Benz C-Class</h5>
+                            <h5 class="text-white fw-bold">Mercedes-Benz Clase S</h5>
                             <p class="TextoTarjeta mb-3">Transmisión Automática • Año 2024 • Gasolina</p>
                         </div>
                         <div class="d-flex gap-2">
-                            <button class="btnVer flex-grow-1"><i class="bi bi-eye"></i> Ver</button>
+                            <a href="detalle.html?id=mercedes" class="btnVer flex-grow-1 text-center text-decoration-none"><i class="bi bi-eye"></i> Ver</a>
                             <button class="btn-action btn-edit"><i class="bi bi-pencil"></i></button>
                             <button class="btn-action btn-delete"><i class="bi bi-trash"></i></button>
                         </div>
@@ -102,24 +95,23 @@
                 </div>
             </div>
 
-            <!-- Vehículo 2 -->
             <div class="col">
                 <div class="card h-100">
                     <div class="position-relative">
-                        <img src="assets/BMW X5 xDrive.jpg" class="card-img-top object-fit-cover" alt="Auto" height="180">
+                        <img src="../assets/lambo.jpg" class="card-img-top object-fit-cover" alt="Lamborghini" height="180">
                         <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">Reservado</span>
                     </div>
-                    <div class="CuerpoTarjeta d-flex flex-column justify-content-between">
+                    <div class="CuerpoTarjeta d-flex flex-column justify-content-between p-3">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="text-gold fw-bold">ID: #AUTO-002</span>
-                                <span class="text-white fw-bold">$62,000/h</span>
+                                <span class="text-gold fw-bold">ID: #AUT-002</span>
+                                <span class="text-white fw-bold">$500.000/d</span>
                             </div>
-                            <h5 class="text-white fw-bold">BMW X5 xDrive</h5>
-                            <p class="TextoTarjeta mb-3">Transmisión Automática • Año 2023 • Híbrido</p>
+                            <h5 class="text-white fw-bold">Lamborghini Huracán</h5>
+                            <p class="TextoTarjeta mb-3">Transmisión Secuencial • Año 2023 • Gasolina</p>
                         </div>
                         <div class="d-flex gap-2">
-                            <button class="btnVer flex-grow-1"><i class="bi bi-eye"></i> Ver</button>
+                            <a href="detalle.html?id=lambo" class="btnVer flex-grow-1 text-center text-decoration-none"><i class="bi bi-eye"></i> Ver</a>
                             <button class="btn-action btn-edit"><i class="bi bi-pencil"></i></button>
                             <button class="btn-action btn-delete"><i class="bi bi-trash"></i></button>
                         </div>
@@ -127,24 +119,23 @@
                 </div>
             </div>
 
-            <!-- Vehículo 3 -->
             <div class="col">
                 <div class="card h-100">
                     <div class="position-relative">
-                        <img src="assets/Porsche 911 Carrera.jpg" class="card-img-top object-fit-cover" alt="Auto" height="180">
+                        <img src="../assets/ferrari.jpg" class="card-img-top object-fit-cover" alt="Ferrari" height="180">
                         <span class="badge bg-danger position-absolute top-0 end-0 m-3">Mantenimiento</span>
                     </div>
-                    <div class="CuerpoTarjeta d-flex flex-column justify-content-between">
+                    <div class="CuerpoTarjeta d-flex flex-column justify-content-between p-3">
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="text-gold fw-bold">ID: #AUTO-003</span>
-                                <span class="text-white fw-bold">$88,000/h</span>
+                                <span class="text-gold fw-bold">ID: #AUT-003</span>
+                                <span class="text-white fw-bold">$600.000/d</span>
                             </div>
-                            <h5 class="text-white fw-bold">Porsche 911 Carrera</h5>
-                            <p class="TextoTarjeta mb-3">Transmisión PDK • Año 2024 • Gasolina</p>
+                            <h5 class="text-white fw-bold">Ferrari 488</h5>
+                            <p class="TextoTarjeta mb-3">Transmisión F1 DCT • Año 2024 • Gasolina</p>
                         </div>
                         <div class="d-flex gap-2">
-                            <button class="btnVer flex-grow-1"><i class="bi bi-eye"></i> Ver</button>
+                            <a href="detalle.html?id=ferrari" class="btnVer flex-grow-1 text-center text-decoration-none"><i class="bi bi-eye"></i> Ver</a>
                             <button class="btn-action btn-edit"><i class="bi bi-pencil"></i></button>
                             <button class="btn-action btn-delete"><i class="bi bi-trash"></i></button>
                         </div>
@@ -155,7 +146,6 @@
     </main>
 </div>
 
-<!-- MODAL: AGREGAR / EDITAR VEHÍCULO -->
 <div class="modal fade" id="modalNuevoAuto" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -188,7 +178,7 @@
                         </div>
                         <div class="col-md-12">
                             <label class="form-label text-secondary">Especificaciones / Detalles</label>
-                            <textarea class="form-control bg-dark text-white border-secondary" rows="3" placeholder="Transmisión, tipo de combustible, etc."></textarea>
+                            <textarea class="form-control bg-dark text-white border-secondary" rows="3" placeholder="Transmisión, combustible, etc."></textarea>
                         </div>
                     </div>
                 </form>
@@ -201,9 +191,6 @@
     </div>
 </div>
 
-<!-- JS de Bootstrap -->
-<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

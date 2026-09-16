@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Proceso de Alquiler</title>
 
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="estilo.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/estilo.css" rel="stylesheet">
 </head>
 <body>
 
@@ -51,9 +51,7 @@
                                             <th>Acción</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tabla-carrito-body">
-                                        <!-- Se llena con js/carrito.js -->
-                                    </tbody>
+                                    <tbody id="tabla-carrito-body"></tbody>
                                     <tfoot>
                                         <tr class="fw-bold table-light">
                                             <td colspan="3" class="text-end">Total Reserva:</td>
@@ -71,13 +69,13 @@
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="firstName" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" required>
+                                <input type="text" class="form-control" id="firstName" required>
                                 <div class="invalid-feedback">El nombre es requerido.</div>
                             </div>
 
                             <div class="col-sm-6">
                                 <label for="lastName" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" required>
+                                <input type="text" class="form-control" id="lastName" required>
                                 <div class="invalid-feedback">El apellido es requerido.</div>
                             </div>
 
@@ -115,7 +113,7 @@
                         <div class="row gy-3">
                             <div class="col-md-6">
                                 <label for="cardName" class="form-label">Nombre en la tarjeta</label>
-                                <input type="text" class="form-control" id="cardName" placeholder="" required>
+                                <input type="text" class="form-control" id="cardName" required>
                                 <div class="invalid-feedback">El nombre en la tarjeta es requerido.</div>
                             </div>
 
@@ -151,9 +149,8 @@
         </footer>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/carrito.js"></script>
-    <script src="js/validaciones.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/validaciones.js"></script>
 </body>
 </html>

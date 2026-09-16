@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Autos</title>
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="estilo.css">
+    <!-- Rutas corregidas saliendo de la carpeta html/ -->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
 
@@ -39,7 +40,7 @@
                 <h2 class="display-5">Clientes satisfechos</h2>
                 <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
             </div>
-            <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
+            <img src="../assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto; object-fit: cover;">
         </div>
 
         <div class="bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden rounded flex-fill">
@@ -47,7 +48,7 @@
                 <h2 class="display-5">Cliente satisfecho</h2>
                 <p class="descripcion">"Excelente servicio y vehículos en perfecto estado."</p>
             </div>
-            <img src="assets/clienteContento.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto;">
+            <img src="../assets/clienteSatisfecho.jpg" alt="Cliente" height="300" style="display: block; margin: 0 auto; object-fit: cover;">
         </div>
     </div>
 
@@ -57,14 +58,16 @@
 
             <!-- Tarjeta 1: Lamborghini -->
             <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="assets/lambo.jpg" class="ImagenTarjeta" alt="Lamborghini" height="225" style="object-fit: cover;">
-                    <div class="CuerpoTarjeta">
+                <div class="card shadow-sm h-100">
+                    <img src="../assets/lambo.jpg" class="ImagenTarjeta" alt="Lamborghini" height="225" style="object-fit: cover;">
+                    <div class="CuerpoTarjeta p-3 d-flex flex-column">
                         <h5 class="fw-bold mt-2">Lamborghini Huracán</h5>
-                        <p class="TextoTarjeta">Superdeportivo italiano con motor V10.</p>
+                        <p class="TextoTarjeta flex-grow-1">Superdeportivo italiano con motor V10.</p>
+                        <span class="fw-bold text-warning mb-2">$500.000 / día</span>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="detalle.html?id=lambo" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <a href="detalle.html?id=lambo" class="btn btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="agregarAlCarrito('Lamborghini Huracán', 500000)">Alquilar</button>
                             </div>
                         </div>
                     </div>
@@ -73,14 +76,16 @@
 
             <!-- Tarjeta 2: Mercedes-Benz -->
             <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="assets/mercedes.jpeg" class="ImagenTarjeta" alt="Mercedes-Benz" height="225" style="object-fit: cover;">
-                    <div class="CuerpoTarjeta">
+                <div class="card shadow-sm h-100">
+                    <img src="../assets/mercedes.jpeg" class="ImagenTarjeta" alt="Mercedes-Benz" height="225" style="object-fit: cover;">
+                    <div class="CuerpoTarjeta p-3 d-flex flex-column">
                         <h5 class="fw-bold mt-2">Mercedes-Benz Clase S</h5>
-                        <p class="TextoTarjeta">Confort ejecutivo y máxima seguridad.</p>
+                        <p class="TextoTarjeta flex-grow-1">Confort ejecutivo y máxima seguridad.</p>
+                        <span class="fw-bold text-warning mb-2">$300.000 / día</span>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="detalle.html?id=mercedes" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <a href="detalle.html?id=mercedes" class="btn btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="agregarAlCarrito('Mercedes-Benz Clase S', 300000)">Alquilar</button>
                             </div>
                         </div>
                     </div>
@@ -89,14 +94,16 @@
 
             <!-- Tarjeta 3: Rolls Royce -->
             <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="assets/rollsRoyce.jpg" class="ImagenTarjeta" alt="Rolls Royce" height="225" style="object-fit: cover;">
-                    <div class="CuerpoTarjeta">
+                <div class="card shadow-sm h-100">
+                    <img src="../assets/rollsRoyce.jpg" class="ImagenTarjeta" alt="Rolls Royce" height="225" style="object-fit: cover;">
+                    <div class="CuerpoTarjeta p-3 d-flex flex-column">
                         <h5 class="fw-bold mt-2">Rolls Royce Phantom</h5>
-                        <p class="TextoTarjeta">El máximo estándar en lujo y exclusividad.</p>
+                        <p class="TextoTarjeta flex-grow-1">El máximo estándar en lujo y exclusividad.</p>
+                        <span class="fw-bold text-warning mb-2">$800.000 / día</span>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="detalle.html?id=rolls" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <a href="detalle.html?id=rolls" class="btn btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="agregarAlCarrito('Rolls Royce Phantom', 800000)">Alquilar</button>
                             </div>
                         </div>
                     </div>
@@ -105,14 +112,16 @@
 
             <!-- Tarjeta 4: Ferrari -->
             <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="assets/ferrari.jpg" class="ImagenTarjeta" alt="Ferrari" height="225" style="object-fit: cover;">
-                    <div class="CuerpoTarjeta">
+                <div class="card shadow-sm h-100">
+                    <img src="../assets/ferrari.jpg" class="ImagenTarjeta" alt="Ferrari" height="225" style="object-fit: cover;">
+                    <div class="CuerpoTarjeta p-3 d-flex flex-column">
                         <h5 class="fw-bold mt-2">Ferrari 488</h5>
-                        <p class="TextoTarjeta">Velocidad, sonido icónico y diseño deportivo.</p>
+                        <p class="TextoTarjeta flex-grow-1">Velocidad, sonido icónico y diseño deportivo.</p>
+                        <span class="fw-bold text-warning mb-2">$600.000 / día</span>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="detalle.html?id=ferrari" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <a href="detalle.html?id=ferrari" class="btn btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="agregarAlCarrito('Ferrari 488', 600000)">Alquilar</button>
                             </div>
                         </div>
                     </div>
@@ -121,14 +130,16 @@
 
             <!-- Tarjeta 5: McLaren -->
             <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="assets/Mclarenjpg.jpg" class="ImagenTarjeta" alt="McLaren" height="225" style="object-fit: cover;">
-                    <div class="CuerpoTarjeta">
+                <div class="card shadow-sm h-100">
+                    <img src="../assets/Mclarenjpg.jpg" class="ImagenTarjeta" alt="McLaren" height="225" style="object-fit: cover;">
+                    <div class="CuerpoTarjeta p-3 d-flex flex-column">
                         <h5 class="fw-bold mt-2">McLaren 720S</h5>
-                        <p class="TextoTarjeta">Estructura ultraligera de fibra de carbono.</p>
+                        <p class="TextoTarjeta flex-grow-1">Estructura ultraligera de fibra de carbono.</p>
+                        <span class="fw-bold text-warning mb-2">$550.000 / día</span>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="detalle.html?id=mclaren" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <a href="detalle.html?id=mclaren" class="btn btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="agregarAlCarrito('McLaren 720S', 550000)">Alquilar</button>
                             </div>
                         </div>
                     </div>
@@ -137,14 +148,16 @@
 
             <!-- Tarjeta 6: Bugatti -->
             <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <img src="assets/bugatti.jpg" class="ImagenTarjeta" alt="Bugatti" height="225" style="object-fit: cover;">
-                    <div class="CuerpoTarjeta">
+                <div class="card shadow-sm h-100">
+                    <img src="../assets/bugatti.jpg" class="ImagenTarjeta" alt="Bugatti" height="225" style="object-fit: cover;">
+                    <div class="CuerpoTarjeta p-3 d-flex flex-column">
                         <h5 class="fw-bold mt-2">Bugatti Chiron</h5>
-                        <p class="TextoTarjeta">Potencia extrema con motor W16 quad-turbo.</p>
+                        <p class="TextoTarjeta flex-grow-1">Potencia extrema con motor W16 quad-turbo.</p>
+                        <span class="fw-bold text-warning mb-2">$900.000 / día</span>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="detalle.html?id=bugatti" class="btnVer btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <a href="detalle.html?id=bugatti" class="btn btn-sm btn-outline-secondary text-decoration-none">Ver</a>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="agregarAlCarrito('Bugatti Chiron', 900000)">Alquilar</button>
                             </div>
                         </div>
                     </div>
@@ -155,17 +168,17 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="text-muted py-5">
+    <footer class="text-muted py-5 border-top">
         <div class="container">
             <p class="float-end mb-1">
-                <a href="#">Back to top</a>
+                <a href="#">Volver arriba</a>
             </p>
             <p class="mb-1">&copy; Autos Rentados - Calidad y Confort para tus Eventos</p>
         </div>
     </footer>
 
-    <!-- SCRIPTS -->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/carrito.js"></script>
+    <!-- SCRIPTS CON RUTA CORREGIDA -->
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/carrito.js"></script>
 </body>
 </html>

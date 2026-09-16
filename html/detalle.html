@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Detalle del Vehículo</title>
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="estilo.css" rel="stylesheet">
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/estilo.css" rel="stylesheet">
 </head>
 <body>
 
@@ -29,20 +29,20 @@
         </div>
     </div>
 
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/carrito.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/carrito.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const params = new URLSearchParams(window.location.search);
             const idAuto = params.get('id');
 
             const vehiculos = [
-                { id: "lambo", nombre: "Lamborghini Huracán", precio: 500000, desc: "Superdeportivo con motor V10 atmosférico, tracción integral y aceleración de 0 a 100 km/h en 3.2 segundos.", img: "assets/lambo.jpg" },
-                { id: "rolls", nombre: "Rolls Royce Phantom", precio: 800000, desc: "El epítome del lujo y la comodidad. Conducción suave y acabados artesanales de primer nivel.", img: "assets/rollsRoyce.jpg" },
-                { id: "bugatti", nombre: "Bugatti Chiron", precio: 900000, desc: "Hiperdeportivo exclusivo con motor W16 quad-turbo de 1500 CV.", img: "assets/bugatti.jpg" },
-                { id: "ferrari", nombre: "Ferrari 488", precio: 600000, desc: "Diseño aerodinámico italiano, motor V8 turboalimentado con respuesta instantánea.", img: "assets/ferrari.jpg" },
-                { id: "mclaren", nombre: "McLaren 720S", precio: 550000, desc: "Estructura de fibra de carbono ultra liviana con rendimiento de pista homologado para calle.", img: "assets/Mclarenjpg.jpg" },
-                { id: "mercedes", nombre: "Mercedes-Benz Clase S", precio: 300000, desc: "Elegancia ejecutiva, tecnología de punta y máxima seguridad en ruta.", img: "assets/mercedes.jpeg" }
+                { id: "lambo", nombre: "Lamborghini Huracán", precio: 500000, desc: "Superdeportivo con motor V10 atmosférico, tracción integral y aceleración de 0 a 100 km/h en 3.2 segundos.", img: "../assets/lambo.jpg" },
+                { id: "rolls", nombre: "Rolls Royce Phantom", precio: 800000, desc: "El epítome del lujo y la comodidad. Conducción suave y acabados artesanales de primer nivel.", img: "../assets/rollsRoyce.jpg" },
+                { id: "bugatti", nombre: "Bugatti Chiron", precio: 900000, desc: "Hiperdeportivo exclusivo con motor W16 quad-turbo de 1500 CV.", img: "../assets/bugatti.jpg" },
+                { id: "ferrari", nombre: "Ferrari 488", precio: 600000, desc: "Diseño aerodinámico italiano, motor V8 turboalimentado con respuesta instantánea.", img: "../assets/ferrari.jpg" },
+                { id: "mclaren", nombre: "McLaren 720S", precio: 550000, desc: "Estructura de fibra de carbono ultra liviana con rendimiento de pista homologado para calle.", img: "../assets/Mclarenjpg.jpg" },
+                { id: "mercedes", nombre: "Mercedes-Benz Clase S", precio: 300000, desc: "Elegancia ejecutiva, tecnología de punta y máxima seguridad en ruta.", img: "../assets/mercedes.jpeg" }
             ];
 
             const auto = vehiculos.find(v => v.id === idAuto) || vehiculos[0];
