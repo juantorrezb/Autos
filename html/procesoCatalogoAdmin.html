@@ -21,26 +21,26 @@
                         <h4 class="mb-3">Datos del Vehículo</h4>
                         <div class="row g-3">
                             <div class="col-sm-6">
-                                <label for="firstName" class="form-label">ID del Vehículo</label>
+                                <label for="IdCar" class="form-label">ID del Vehículo</label>
                                 <input type="text" class="form-control" id="IdCar" required>
-                                <div class="invalid-feedback">El ID del vehículo es requerido.</div>
+                                <div id="errorId" class="invalid-feedback"></div>
                             </div>
 
                             <div class="col-sm-6">
-                                <label for="lastName" class="form-label">Marca</label>
+                                <label for="MarcaAuto" class="form-label">Marca</label>
                                 <input type="text" class="form-control" id="MarcaAuto" required>
-                                <div class="invalid-feedback">La marca es requerida.</div>
+                                <div id="errorMarca" class="invalid-feedback"></div>
                             </div>
 
                             <div class="col-12">
-                                <label for="email" class="form-label">Modelo</label>
-                                <input type="email" class="form-control" id="ModeloAuto" required>
-                                <div class="invalid-feedback">El modelo es requerido.</div>
+                                <label for="ModeloAuto" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="ModeloAuto" required>
+                                <div id="errorModelo" class="invalid-feedback"></div>
                             </div>
                             <div class="col-12">
-                                <label for="address" class="form-label">Precio </label>
-                                <input type="text" class="form-control" id="PrecioAuto" placeholder="Av. Principal 123" required>
-                                <div class="invalid-feedback">El precio es requerido.</div>
+                                <label for="PrecioAuto" class="form-label">Precio</label>
+                                <input type="text" class="form-control" id="PrecioAuto" required>
+                                <div id="errorPrecio" class="invalid-feedback"></div>
                             </div>
                         </div>
                         <hr class="my-4">
@@ -58,5 +58,6 @@
     </div>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/procesoCatalogoAdmin.js"></script>
 </body>
 </html>
