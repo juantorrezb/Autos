@@ -150,11 +150,7 @@ footer a:hover {
 /* ==========================================
    1. Estilos Generales
    ========================================== */
-body {
-    background-color: #0f0f11;
-    color: #e4e4e4;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-}
+
 
 /* Colores Utilitarios */
 .texto-dorado {
@@ -292,22 +288,4 @@ body {
     color: #ffffff !important;
     border-color: #c9a227 !important;
     box-shadow: 0 0 0 0.25rem rgba(201, 162, 39, 0.25) !important;
-}
-
-/* ==========================================
-   6. Pie de Página (Footer)
-   ========================================== */
-footer {
-    background-color: #09090b;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: #a0a0a0 !important;
-}
-
-footer a {
-    color: #c9a227;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }

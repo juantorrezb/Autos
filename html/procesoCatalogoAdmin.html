@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proceso de Agregar autos</title>
+
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/estilo.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h2>Proceso de Agregar Autos</h2>
+                <p class="lead">Siga estos pasos para agregar un nuevo vehículo al catálogo. Complete los datos del vehículo y seleccione la imagen para confirmar su registro.</p>
+            </div>
+                    <!-- FORMULARIO DE RESERVA Y PAGO -->
+                    <form id="formularioReserva">
+                        <h4 class="mb-3">Datos del Vehículo</h4>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">ID del Vehículo</label>
+                                <input type="text" class="form-control" id="IdCar" required>
+                                <div class="invalid-feedback">El ID del vehículo es requerido.</div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">Marca</label>
+                                <input type="text" class="form-control" id="MarcaAuto" required>
+                                <div class="invalid-feedback">La marca es requerida.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="email" class="form-label">Modelo</label>
+                                <input type="email" class="form-control" id="ModeloAuto" required>
+                                <div class="invalid-feedback">El modelo es requerido.</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Precio </label>
+                                <input type="text" class="form-control" id="PrecioAuto" placeholder="Av. Principal 123" required>
+                                <div class="invalid-feedback">El precio es requerido.</div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+
+                        <button class="w-100 btnVer btn-lg" type="submit" id="btnSubmit">Confirmar Nuevo vehiculo</button>
+                    </form>
+
+                </div>
+            </div>
+        </main>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; Autos Rentados</p>
+        </footer>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
