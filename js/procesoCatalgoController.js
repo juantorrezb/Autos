@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputMarcaAuto = document.getElementById("MarcaAuto")
     const inputModeloAuto = document.getElementById("ModeloAuto")
     const inputPrecioAuto = document.getElementById("PrecioAuto")
+    const btnConfirm = document.getElementById("btnSubmit")
     // Helper: Limpiar espacios en blanco
     function getInputValue(inputElement) {
         return inputElement ? inputElement.value.trim() : "";
