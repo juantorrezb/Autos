@@ -151,7 +151,6 @@ footer a:hover {
    1. Estilos Generales
    ========================================== */
 
-
 /* Colores Utilitarios */
 .texto-dorado {
     color: #c9a227 !important;
@@ -288,4 +287,31 @@ footer a:hover {
     color: #ffffff !important;
     border-color: #c9a227 !important;
     box-shadow: 0 0 0 0.25rem rgba(201, 162, 39, 0.25) !important;
+}
+
+/* ==========================================
+   6. Visibilidad de Textos en Formularios y Login
+   ========================================== */
+/* Hace visible el título "Crear Cuenta" e "Iniciar Sesión" */
+.card h4, 
+.card h5 {
+    color: #ffffff !important;
+}
+
+/* Hace visibles las etiquetas de los inputs (RUN, Nombre, Apellido, etc.) */
+.form-label {
+    color: #e4e4e4 !important;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+}
+
+/* Reemplaza el azul de Bootstrap en las pestañas de Login/Registro por el dorado */
+.nav-pills .nav-link {
+    color: #a0a0a0 !important;
+    font-weight: 600;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #c9a227 !important;
+    color: #0f0f11 !important;
 }
