@@ -8,14 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardExpiration = document.getElementById("cardExpiration")
     const cardCvv = document.getElementById("cardCvv")
     const btnConfirm = document.getElementById("btnSubmit")
-    const carTypeSelect = document.getElementById("carSelect")
     const cardNumberRegex = /^[0-9]{16}$/
     const cardExpirationRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/
     const cardCvvRegex = /^[0-9]{3}$/
     //Obtener las referencias a los elementos de error
     const errorPrimerNombre = document.getElementById("errorFirstName")
     const errorApellido = document.getElementById("errorLastName")
-    const errorTipoDeAuto = document.getElementById("errorCarType")
     const errorDireccion = document.getElementById("errorAddress")
     const errorNombreTarjeta = document.getElementById("errorCardName")
     const errorNumeroTarjeta = document.getElementById("errorCardNumber")
@@ -25,14 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper: Limpiar espacios en blanco
     function getInputValue(inputElement) {
         return inputElement ? inputElement.value.trim() : "";
-    }
-    //Funcion para tomar los datos del droopdown
-    function getSelectionValue(selectElement){
-        const selectedOption = selectElement.options[selectElement.selectedIndex]
-
-        return {value : selectElement.value,                    //El valor de la opcion
-            text: selectedOption ? selectedOption.text : ""     //El texto visible de la opcion
-        }
     }
 //Funcion para limpiar el error visual de los campos especificos
     function cleanErrorMensaje(errorElement){
@@ -44,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Escuchar cambios en tiempo real para limpiar los mensajes de error
     inputFirstName.addEventListener("input",() => cleanErrorMensaje(errorPrimerNombre))
     inputLastName.addEventListener("input",() => cleanErrorMensaje(errorApellido))
-    carTypeSelect.addEventListener("input",() => cleanErrorMensaje(errorTipoDeAuto))
     inputAddress.addEventListener("input",() => cleanErrorMensaje(errorDireccion))
     cardName.addEventListener("input",() => cleanErrorMensaje(errorNombreTarjeta))
     cardNumber.addEventListener("input",() => cleanErrorMensaje(errorNumeroTarjeta))
@@ -58,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstName = getInputValue(inputFirstName)
         const lastName = getInputValue(inputLastName)
         const address = getInputValue(inputAddress)
-        const carType = getSelectionValue(carTypeSelect)
         const cardNameValue = getInputValue(cardName)
         const cardNumberValue = getInputValue(cardNumber)
         const cardExpirationValue = getInputValue(cardExpiration)
@@ -67,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("First Name:", firstName)
         console.log("Last Name:", lastName)
         console.log("Address:", address)
-        console.log("Car Type:", carType.text, "Value:", carType.value)
         console.log("Card Name:", cardNameValue)
         console.log("Card Number:", cardNumberValue)
         console.log("Card Expiration:", cardExpirationValue)
@@ -84,12 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         errorApellido.textContent = "Ingrese un apellido valido."
         errorApellido.style.display = "block"
         console.error("Error: Ingrese un apellido valido.")
-        return
-    }
-    if(carType.value==""){
-        errorTipoDeAuto.textContent = "Ingrese un tipo de auto valido."
-        errorTipoDeAuto.style.display = "block"
-        console.error("Error: Ingrese un tipo de auto valido.")
         return
     }
     if(!address){

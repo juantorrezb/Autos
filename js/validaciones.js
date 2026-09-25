@@ -112,70 +112,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 setFeedback(inputPassword, errorPassword, "", true);
             }
 
-            if (esValido) {
-                alert("Validación exitosa. Iniciando sesión...");
-                window.location.href = "Index.html";
-            }
-        });
-    }
-
     // ==========================================
     // 2. VALIDACIÓN DEL PROCESO DE ALQUILER
     // ==========================================
-    const formularioReserva = document.getElementById("formularioReserva");
-
-    if (formularioReserva) {
-        formularioReserva.addEventListener("submit", function(evento) {
-            evento.preventDefault(); 
-            let esValido = true;
-
-            const nombre = document.getElementById("firstName");
-            const apellido = document.getElementById("lastName");
-            const email = document.getElementById("email");
-            const vehiculo = document.getElementById("carSelect");
-            const numTarjeta = document.getElementById("cardNumber");
-            const cvv = document.getElementById("cardCvv");
-
-            function validarCampo(campo, condicion) {
-                if (condicion) {
-                    campo.classList.remove("is-invalid");
-                    campo.classList.add("is-valid");
-                } else {
-                    campo.classList.remove("is-valid");
-                    campo.classList.add("is-invalid");
-                    esValido = false;
-                }
-            }
-
-            validarCampo(nombre, nombre && nombre.value.trim() !== "");
-            validarCampo(apellido, apellido && apellido.value.trim() !== "");
-            validarCampo(vehiculo, vehiculo && vehiculo.value !== "");
-
-            if (email) {
-                validarCampo(email, validarCorreoEstricto(email.value.trim()));
-            }
-
-            const regexTarjeta = /^\d{16}$/;
-            if (numTarjeta) {
-                validarCampo(numTarjeta, regexTarjeta.test(numTarjeta.value.trim()));
-            }
-
-            const regexCVV = /^\d{3}$/;
-            if (cvv) {
-                validarCampo(cvv, regexCVV.test(cvv.value.trim()));
-            }
-
-            if (esValido) {
-                alert(`¡Reserva confirmada con éxito, ${nombre.value}! El contrato será enviado a ${email.value}.`);
-                formularioReserva.reset(); 
-                
-                const inputs = formularioReserva.querySelectorAll('.form-control, .form-select');
-                inputs.forEach(input => input.classList.remove('is-valid'));
-            } else {
-                alert("Faltan datos o hay errores en el formulario de pago.");
-            }
-        });
-    }
 
     // ==========================================
     // 3. SELECCIÓN AUTOMÁTICA DESDE EL LOCALSTORAGE
@@ -200,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // ==========================================
     // 4. VALIDACIÓN DE REGISTRO DE USUARIO
     // ==========================================
-    const formRegistro = document.getElementById("formRegistro");
+    /*const formRegistro = document.getElementById("formRegistro");
 
     if (formRegistro) {
         formRegistro.addEventListener("submit", function(evento) {
@@ -269,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     setFeedback(inputCorreo, errorCorreo, "", true);
                 }
-            }
+            }*/
 
             // Contraseña (4 a 10 caracteres)
             const esPassValida = pass.length >= 4 && pass.length <= 10;

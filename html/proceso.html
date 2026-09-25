@@ -70,25 +70,25 @@
                             <div class="col-sm-6">
                                 <label for="firstName" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="firstName" required>
-                                <div class="invalid-feedback">El nombre es requerido.</div>
+                                <div id="errorFirstName" class="invalid-feedback">El nombre es requerido.</div>
                             </div>
 
                             <div class="col-sm-6">
                                 <label for="lastName" class="form-label">Apellido</label>
                                 <input type="text" class="form-control" id="lastName" required>
-                                <div class="invalid-feedback">El apellido es requerido.</div>
+                                <div id="errorLastName" class="invalid-feedback">El apellido es requerido.</div>
                             </div>
 
                             <div class="col-12">
                                 <label for="email" class="form-label">Correo Electrónico</label>
                                 <input type="email" class="form-control" id="email" placeholder="usuario@duoc.cl" required>
-                                <div class="invalid-feedback">Ingrese un correo válido (@duoc.cl, @profesor.duoc.cl o @gmail.com).</div>
+                                <div id="errorEmail" class="invalid-feedback">Ingrese un correo válido (@duoc.cl, @profesor.duoc.cl o @gmail.com).</div>
                             </div>
 
                             <div class="col-12">
                                 <label for="address" class="form-label">Dirección de Entrega</label>
                                 <input type="text" class="form-control" id="address" placeholder="Av. Principal 123" required>
-                                <div class="invalid-feedback">La dirección de entrega es requerida.</div>
+                                <div id="errorAddress" class="invalid-feedback">La dirección de entrega es requerida.</div>
                             </div>
                         </div>
 
@@ -100,43 +100,39 @@
                             <div class="col-md-6">
                                 <label for="cardName" class="form-label">Nombre en la tarjeta</label>
                                 <input type="text" class="form-control" id="cardName" required>
-                                <div class="invalid-feedback">El nombre en la tarjeta es requerido.</div>
+                                <div id="errorCardName" class="invalid-feedback">El nombre en la tarjeta es requerido.</div>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="cardNumber" class="form-label">Número de tarjeta (16 dígitos)</label>
                                 <input type="text" class="form-control" id="cardNumber" placeholder="1234567812345678" maxlength="16" required>
-                                <div class="invalid-feedback">Debe ingresar los 16 dígitos numéricos.</div>
+                                <div id="errorCardNumber" class="invalid-feedback">Debe ingresar los 16 dígitos numéricos.</div>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="cardExpiration" class="form-label">Vencimiento</label>
                                 <input type="text" class="form-control" id="cardExpiration" placeholder="MM/AA" required>
+                                <div id="errorCardExpiration" class="invalid-feedback">Ingrese una fecha de vencimiento válida (MM/AA).</div>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="cardCvv" class="form-label">CVV (3 dígitos)</label>
                                 <input type="text" class="form-control" id="cardCvv" placeholder="123" maxlength="3" required>
-                                <div class="invalid-feedback">Debe ingresar exactamente 3 números.</div>
+                                <div id="errorCardCvv" class="invalid-feedback">Debe ingresar exactamente 3 números.</div>
                             </div>
                         </div>
-
                         <hr class="my-4">
-
                         <button class="w-100 btnVer btn-lg" type="submit" id="btnSubmit">Confirmar Reserva y Recibir Contrato</button>
                     </form>
-
                 </div>
             </div>
         </main>
-
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; Autos Rentados</p>
         </footer>
     </div>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/carrito.js"></script>
-    <script src="../js/validaciones.js"></script>
+    <script src="../js/procesoController.js"></script>
 </body>
 </html>
