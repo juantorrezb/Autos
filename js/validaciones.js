@@ -112,9 +112,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 setFeedback(inputPassword, errorPassword, "", true);
             }
 
-    // ==========================================
-    // 2. VALIDACIÓN DEL PROCESO DE ALQUILER
-    // ==========================================
+            if (esValido) {
+                alert("Validación exitosa. Iniciando sesión...");
+                window.location.href = "Index.html";
+            }
+        });
+    }
+
 
     // ==========================================
     // 3. SELECCIÓN AUTOMÁTICA DESDE EL LOCALSTORAGE
@@ -139,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // ==========================================
     // 4. VALIDACIÓN DE REGISTRO DE USUARIO
     // ==========================================
-    /*const formRegistro = document.getElementById("formRegistro");
+    const formRegistro = document.getElementById("formRegistro");
 
     if (formRegistro) {
         formRegistro.addEventListener("submit", function(evento) {
@@ -208,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     setFeedback(inputCorreo, errorCorreo, "", true);
                 }
-            }*/
+            }
 
             // Contraseña (4 a 10 caracteres)
             const esPassValida = pass.length >= 4 && pass.length <= 10;
