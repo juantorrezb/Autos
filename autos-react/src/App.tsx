@@ -1,9 +1,12 @@
 import Navbar from "./componets/Navbar";
+//import Footer from "./componets/Footer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return <Navbar></Navbar>;
+
+  // return <Footer></Footer>;
 }
 
 export default App;
