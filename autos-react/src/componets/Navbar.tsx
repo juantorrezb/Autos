@@ -15,6 +15,9 @@ function Navbar() {
           >
             🛒 Carrito (<span id="contador-carrito">0</span>)
           </a>
+          <a href="Nosotros" className="text-white text-decoration-none">
+            Nosotros
+          </a>
         </div>
       </div>
     </nav>
