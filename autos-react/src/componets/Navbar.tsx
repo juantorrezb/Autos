@@ -17,7 +17,7 @@ function Navbar() {
             to="/login"
           >
             🛒 Carrito (<span id="contador-carrito">0</span>)
-          </a>
+          </Link>
           <a href="Nosotros" className="text-white text-decoration-none">
             Nosotros
           </a>
