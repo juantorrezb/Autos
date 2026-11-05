@@ -1,11 +1,23 @@
 import { Fragment } from "react/jsx-runtime";
+import { Link } from "react-router-dom";
 import Tarjeta from "../componets/Tarjeta";
 import Button from "../componets/Button";
 import { vehiculos } from "../data/Auto";
 
 function Index() {
-  const handleAlquilar = (nombre: string) => {
-    alert(`Vehículo seleccionado: ${nombre}`);
+  const handleAlquilar = (auto: (typeof vehiculos)[0]) => {
+    const data = localStorage.getItem("carritoCompras");
+    const carrito = data ? JSON.parse(data) : [];
+
+    const existe = carrito.find((item: any) => item.id === auto.id);
+    if (existe) {
+      existe.cantidad += 1;
+    } else {
+      carrito.push({ ...auto, cantidad: 1 });
+    }
+
+    localStorage.setItem("carritoCompras", JSON.stringify(carrito));
+    alert(`¡${auto.nombre} añadido a la reserva!`);
   };
 
   return (
@@ -14,11 +26,14 @@ function Index() {
         Vehículos Disponibles para Arriendo
       </h3>
 
-      {/* Contenedor estándar de Bootstrap */}
+      {/* Contenedor */}
       <div className="container text-center mb-5">
         <div className="row g-4 justify-content-center">
           {vehiculos.map((auto) => (
-            <div className="col-md-4 d-flex justify-content-center" key={auto.id}>
+            <div
+              className="col-md-4 d-flex justify-content-center"
+              key={auto.id}
+            >
               <Tarjeta
                 titulo={auto.nombre}
                 texto={auto.desc}
@@ -30,15 +45,17 @@ function Index() {
                   ${auto.precio.toLocaleString("es-CL")} / día
                 </p>
                 <div className="d-flex justify-content-center gap-2 mt-auto">
-                  <Button
-                    clase="btn btn-outline-light btn-sm"
-                    alHacerClic={() => alert(`Ficha técnica de: ${auto.nombre}`)}
+                  {/* Navegación al detalle usando Link como en la plantilla del profe */}
+                  <Link
+                    to={`/detalle/${auto.id}`}
+                    className="btn btn-outline-light btn-sm"
                   >
                     Ver Detalle
-                  </Button>
+                  </Link>
+
                   <Button
                     clase="btn btn-warning btn-sm fw-semibold"
-                    alHacerClic={() => handleAlquilar(auto.nombre)}
+                    alHacerClic={() => handleAlquilar(auto)}
                   >
                     Alquilar
                   </Button>
