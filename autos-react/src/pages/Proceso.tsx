@@ -1,242 +1,208 @@
-import { Fragment, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import type { Auto } from "../data/Auto";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "../componets/Button";
+import Tarjeta from "../componets/Tarjeta";
 
-interface CarritoItem extends Auto {
+interface ItemCarrito {
+  id: string;
+  nombre: string;
+  precio: number;
   cantidad: number;
+  desc?: string;
+  img?: string;
 }
 
-function ProcesoAlquiler() {
-  const [carrito, setCarrito] = useState<CarritoItem[]>([]);
-  const [total, setTotal] = useState<number>(0);
+function Proceso() {
+  const [carrito, setCarrito] = useState<ItemCarrito[]>([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  const cargarCarrito = () => {
     const data = localStorage.getItem("carritoCompras");
     if (data) {
-      const parsedCarrito: CarritoItem[] = JSON.parse(data);
-      setCarrito(parsedCarrito);
-
-      const totalReserva = parsedCarrito.reduce(
-        (acc, item) => acc + item.precio * item.cantidad,
-        0,
-      );
-      setTotal(totalReserva);
+      try {
+        setCarrito(JSON.parse(data));
+      } catch {
+        setCarrito([]);
+      }
+    } else {
+      setCarrito([]);
     }
+  };
+
+  useEffect(() => {
+    cargarCarrito();
   }, []);
+
+  const eliminarItem = (id: string) => {
+    const nuevoCarrito = carrito.filter((item) => item.id !== id);
+    localStorage.setItem("carritoCompras", JSON.stringify(nuevoCarrito));
+    setCarrito(nuevoCarrito);
+    window.dispatchEvent(new Event("storage"));
+  };
 
   const vaciarCarrito = () => {
     localStorage.removeItem("carritoCompras");
     setCarrito([]);
-    setTotal(0);
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  const total = carrito.reduce(
+    (acc, item) => acc + item.precio * (item.cantidad || 1),
+    0,
+  );
+
+  const handlePagar = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (carrito.length === 0) {
+      alert("No hay vehículos en la reserva.");
+      return;
+    }
+    alert(
+      "¡Reserva confirmada con éxito! Te hemos enviado el comprobante a tu correo.",
+    );
+    vaciarCarrito();
+    navigate("/");
   };
 
   return (
-    <Fragment>
-      {/* BARRA SUPERIOR */}
-      <nav className="navbar navbar-dark bg-dark sticky-top shadow-sm">
-        <div className="container">
-          <Link className="navbar-brand fw-bold" to="/">
-            Autos Rentados
-          </Link>
-          <div className="d-flex align-items-center">
-            <Link to="/" className="btn btn-outline-light btn-sm me-3">
-              Volver al Catálogo
-            </Link>
-            <span className="navbar-text text-warning fw-semibold">
-              🛒 Carrito (<span id="contador-carrito">{carrito.length}</span>)
-            </span>
+    <div className="container py-5 text-white">
+      <h2 className="text-warning fw-bold mb-4 text-center">
+        Tu Reserva de Arriendo
+      </h2>
+
+      <div className="row g-4">
+        {/* LISTADO DE AUTOS USANDO COMPONENTES TARJETA Y BUTTON */}
+        <div className="col-lg-7">
+          <div className="card bg-dark border-secondary p-4 rounded-4 shadow-sm mb-4">
+            <div className="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
+              <h5 className="mb-0 text-white">
+                Vehículos Seleccionados ({carrito.length})
+              </h5>
+              {carrito.length > 0 && (
+                <Button
+                  clase="btn btn-outline-danger btn-sm"
+                  alHacerClic={vaciarCarrito}
+                >
+                  Vaciar Reserva
+                </Button>
+              )}
+            </div>
+
+            {carrito.length === 0 ? (
+              <div className="text-center py-5">
+                <p className="text-secondary fs-5 mb-3">
+                  No has seleccionado ningún vehículo aún.
+                </p>
+                <Link to="/" className="btn btn-warning fw-semibold">
+                  Explorar Catálogo de Autos
+                </Link>
+              </div>
+            ) : (
+              <div className="row g-3">
+                {carrito.map((item) => (
+                  <div className="col-12" key={item.id}>
+                    <Tarjeta
+                      titulo={item.nombre}
+                      texto={
+                        item.desc ||
+                        "Vehículo exclusivo seleccionado para arriendo."
+                      }
+                      urlImagen={item.img || "/assets/lambo.jpg"}
+                      altImagen={item.nombre}
+                      clase="card bg-black text-white border-secondary h-100 shadow-sm"
+                    >
+                      <div className="d-flex justify-content-between align-items-center mt-2 border-top border-secondary pt-2">
+                        <div>
+                          <span className="text-secondary small d-block">
+                            Precio por día: $
+                            {item.precio.toLocaleString("es-CL")}
+                          </span>
+                          <span className="text-warning fw-bold fs-6">
+                            Subtotal: $
+                            {(
+                              item.precio * (item.cantidad || 1)
+                            ).toLocaleString("es-CL")}
+                          </span>
+                        </div>
+                        <Button
+                          clase="btn btn-outline-danger btn-sm"
+                          alHacerClic={() => eliminarItem(item.id)}
+                        >
+                          Quitar
+                        </Button>
+                      </div>
+                    </Tarjeta>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </nav>
 
-      <div className="container">
-        <main>
-          <div className="py-5 text-center">
-            <h2>Proceso de Alquiler</h2>
-            <p className="lead text-white">
-              Siga estos pasos para alquilar un vehículo. Complete sus datos
-              personales y seleccione el método de pago para confirmar su
-              reserva.
-            </p>
-          </div>
+        {/* RESUMEN Y PAGO USANDO COMPONENTE BUTTON */}
+        <div className="col-lg-5">
+          <div className="card bg-dark border-secondary p-4 rounded-4 shadow-sm">
+            <h5 className="text-warning fw-bold mb-3 border-bottom border-secondary pb-2">
+              Resumen de Reserva
+            </h5>
 
-          <div className="row g-5">
-            <div className="col-md-8 mx-auto">
-              {/* TABLA RESUMEN DEL CARRITO */}
-              <div className="card shadow-sm mb-4 bg-dark text-white border-secondary">
-                <div className="card-header bg-black text-white d-flex justify-content-between align-items-center border-secondary">
-                  <h5 className="mb-0">Vehículos en la Reserva</h5>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-danger"
-                    onClick={vaciarCarrito}
-                  >
-                    Vaciar Carrito
-                  </button>
-                </div>
-                <div className="card-body">
-                  <div className="table-responsive">
-                    <table className="table table-dark table-striped align-middle">
-                      <thead>
-                        <tr>
-                          <th>Vehículo</th>
-                          <th>Precio Diario</th>
-                          <th>Cantidad</th>
-                          <th>Subtotal</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tabla-carrito-body">
-                        {carrito.length > 0 ? (
-                          carrito.map((item) => (
-                            <tr key={item.id}>
-                              <td>{item.nombre}</td>
-                              <td>${item.precio.toLocaleString("es-CL")}</td>
-                              <td>{item.cantidad}</td>
-                              <td>
-                                $
-                                {(item.precio * item.cantidad).toLocaleString(
-                                  "es-CL",
-                                )}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan={4} className="text-center">
-                              No hay vehículos en la reserva.
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                      <tfoot>
-                        <tr className="fw-bold text-warning">
-                          <td colSpan={3} className="text-end border-0">
-                            Total Reserva:
-                          </td>
-                          <td id="total-carrito" className="border-0">
-                            ${total.toLocaleString("es-CL")}
-                          </td>
-                        </tr>
-                      </tfoot>
-                    </table>
-                  </div>
-                </div>
+            <div className="d-flex justify-content-between mb-3 fs-5">
+              <span>Total por día:</span>
+              <span className="text-warning fw-bold">
+                ${total.toLocaleString("es-CL")}
+              </span>
+            </div>
+
+            <form onSubmit={handlePagar}>
+              <div className="mb-3">
+                <label className="form-label text-light small">
+                  Nombre del Titular
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Tu nombre completo"
+                  className="form-control bg-black text-white border-secondary"
+                />
               </div>
 
-              {/* FORMULARIO DE RESERVA Y PAGO LIMPIO */}
-              <form id="formularioReserva" className="text-white">
-                <h4 className="mb-3">Datos del Cliente y Reserva</h4>
-                <div className="row g-3">
-                  <div className="col-sm-6">
-                    <label htmlFor="firstName" className="form-label">
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="firstName"
-                    />
-                  </div>
+              <div className="mb-3">
+                <label className="form-label text-light small">
+                  RUT / Identificación
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="12.345.678-9"
+                  className="form-control bg-black text-white border-secondary"
+                />
+              </div>
 
-                  <div className="col-sm-6">
-                    <label htmlFor="lastName" className="form-label">
-                      Apellido
-                    </label>
-                    <input type="text" className="form-control" id="lastName" />
-                  </div>
+              <div className="mb-4">
+                <label className="form-label text-light small">
+                  Tarjeta de Crédito o Débito
+                </label>
+                <input
+                  type="text"
+                  maxLength={19}
+                  required
+                  placeholder="XXXX-XXXX-XXXX-XXXX"
+                  className="form-control bg-black text-white border-secondary"
+                />
+              </div>
 
-                  <div className="col-12">
-                    <label htmlFor="email" className="form-label">
-                      Correo Electrónico
-                    </label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      placeholder="usuario@duoc.cl"
-                    />
-                  </div>
-
-                  <div className="col-12">
-                    <label htmlFor="address" className="form-label">
-                      Dirección de Entrega
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="address"
-                      placeholder="Av. Principal 123"
-                    />
-                  </div>
-                </div>
-
-                <hr className="my-4 border-secondary" />
-
-                <h4 className="mb-3">Método de Pago</h4>
-
-                <div className="row gy-3">
-                  <div className="col-md-6">
-                    <label htmlFor="cardName" className="form-label">
-                      Nombre en la tarjeta
-                    </label>
-                    <input type="text" className="form-control" id="cardName" />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="cardNumber" className="form-label">
-                      Número de tarjeta (16 dígitos)
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="cardNumber"
-                      placeholder="1234567812345678"
-                      maxLength={16}
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="cardExpiration" className="form-label">
-                      Vencimiento
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="cardExpiration"
-                      placeholder="MM/AA"
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="cardCvv" className="form-label">
-                      CVV (3 dígitos)
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="cardCvv"
-                      placeholder="123"
-                      maxLength={3}
-                    />
-                  </div>
-                </div>
-
-                <hr className="my-4 border-secondary" />
-
-                <button
-                  className="w-100 btn btn-warning fw-bold btn-lg mb-5"
-                  type="submit"
-                  id="btnSubmit"
-                >
-                  Confirmar Reserva y Recibir Contrato
-                </button>
-              </form>
-            </div>
+              <Button
+                clase="btn btn-warning w-100 py-2 fw-bold text-dark shadow"
+                alHacerClic={() => {}}
+              >
+                Confirmar y Pagar
+              </Button>
+            </form>
           </div>
-        </main>
+        </div>
       </div>
-    </Fragment>
+    </div>
   );
 }
 
-export default ProcesoAlquiler;
+export default Proceso;

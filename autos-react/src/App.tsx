@@ -6,6 +6,8 @@ import Detalle from "./pages/Detalle";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Nosotros from "./pages/Nosotros";
 import Proceso from "./pages/Proceso";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
 import "./App.css";
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
             <Route path="/detalle/:id" element={<Detalle />} />
             <Route path="/Nosotros" element={<Nosotros />} />
             <Route path="/Proceso" element={<Proceso />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Admin" element={<Admin />} />
           </Routes>
         </main>
         <Footer />
