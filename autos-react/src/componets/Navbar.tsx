@@ -16,11 +16,11 @@ function Navbar() {
             className="text-white text-decoration-none fw-semibold"
             to="/login"
           >
-            Iniciar Sesión
-          </Link>
-          <Link to="/proceso" className="btn btn-warning btn-sm fw-semibold">
-            🛒 Carrito
-          </Link>
+            🛒 Carrito (<span id="contador-carrito">0</span>)
+          </a>
+          <a href="Nosotros" className="text-white text-decoration-none">
+            Nosotros
+          </a>
         </div>
       </div>
     </nav>

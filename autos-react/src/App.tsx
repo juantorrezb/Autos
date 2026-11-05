@@ -3,11 +3,9 @@ import Navbar from "./componets/Navbar";
 import Footer from "./componets/Footer";
 import Index from "./pages/Index";
 import Detalle from "./pages/Detalle";
-import Proceso from "./pages/Proceso";
-import Nosotros from "./pages/Nosotros";
-import Login from "./pages/Login";
-import Admin from "./pages/Admin";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Nosotros from "./pages/Nosotros";
+import Proceso from "./pages/Proceso";
 import "./App.css";
 
 function App() {
@@ -20,10 +18,8 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/Index" element={<Index />} />
             <Route path="/detalle/:id" element={<Detalle />} />
-            <Route path="/proceso" element={<Proceso />} />
-            <Route path="/nosotros" element={<Nosotros />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/Nosotros" element={<Nosotros />} />
+            <Route path="/Proceso" element={<Proceso />} />
           </Routes>
         </main>
         <Footer />
