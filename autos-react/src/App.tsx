@@ -14,13 +14,9 @@ function App() {
         <Navbar />
         <main className="flex-grow-1">
           <Routes>
-            {/* Ruta inicial: Catálogo */}
             <Route path="/" element={<Index />} />
-
-            {/* Ruta parametrizada del profe para ver un auto */}
+            <Route path="/Index" element={<Index />} />
             <Route path="/detalle/:id" element={<Detalle />} />
-
-            {/* Ruta para el carrito y checkout */}
             <Route path="/proceso" element={<Proceso />} />
           </Routes>
         </main>

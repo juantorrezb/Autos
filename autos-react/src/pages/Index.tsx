@@ -1,8 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
-import { Link } from "react-router-dom";
 import Tarjeta from "../componets/Tarjeta";
-import Button from "../componets/Button";
 import { vehiculos } from "../data/Auto";
+import { Link } from "react-router-dom";
 
 function Index() {
   const handleAlquilar = (auto: (typeof vehiculos)[0]) => {
@@ -26,9 +25,9 @@ function Index() {
         Vehículos Disponibles para Arriendo
       </h3>
 
-      {/* Contenedor */}
       <div className="container text-center mb-5">
         <div className="row g-4 justify-content-center">
+          {/* Recorremos el arreglo vehiculos de Auto.ts */}
           {vehiculos.map((auto) => (
             <div
               className="col-md-4 d-flex justify-content-center"
@@ -45,20 +44,19 @@ function Index() {
                   ${auto.precio.toLocaleString("es-CL")} / día
                 </p>
                 <div className="d-flex justify-content-center gap-2 mt-auto">
-                  {/* Navegación al detalle usando Link como en la plantilla del profe */}
                   <Link
                     to={`/detalle/${auto.id}`}
                     className="btn btn-outline-light btn-sm"
                   >
-                    Ver Detalle
+                    Detalle
                   </Link>
-
-                  <Button
-                    clase="btn btn-warning btn-sm fw-semibold"
-                    alHacerClic={() => handleAlquilar(auto)}
+                  <button
+                    type="button"
+                    className="btn btn-warning btn-sm fw-semibold"
+                    onClick={() => handleAlquilar(auto)}
                   >
                     Alquilar
-                  </Button>
+                  </button>
                 </div>
               </Tarjeta>
             </div>
