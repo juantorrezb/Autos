@@ -2,96 +2,110 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Tarjeta from "../componets/Tarjeta";
 import Button from "../componets/Button";
-import { vehiculos as datosBase, type Auto } from "../data/Auto";
+import { vehiculos, type Auto } from "../data/Auto";
+import { validarFormulario, reglasAuto } from "../utils/validaciones";
 
-interface ReservaAdmin {
-  id: string;
-  cliente: string;
-  vehiculo: string;
-  estado: string;
-  badgeClase: string;
-}
+const FOTOS = [
+  { nombre: "Mercedes-Benz", ruta: "/assets/mercedes.jpeg" },
+  { nombre: "Lamborghini", ruta: "/assets/lambo.jpg" },
+  { nombre: "Ferrari", ruta: "/assets/ferrari.jpg" },
+  { nombre: "Rolls Royce", ruta: "/assets/rollsRoyce.jpg" },
+  { nombre: "McLaren", ruta: "/assets/Mclarenjpg.jpg" },
+  { nombre: "Bugatti", ruta: "/assets/bugatti.jpg" },
+];
+
+const RESERVAS = [
+  {
+    id: "001",
+    cliente: "Carlos Pérez",
+    vehiculo: "Mercedes-Benz Clase S",
+    estado: "Confirmado",
+    badge: "bg-success",
+  },
+  {
+    id: "002",
+    cliente: "María Gómez",
+    vehiculo: "Lamborghini Huracán",
+    estado: "Pendiente",
+    badge: "bg-warning text-dark",
+  },
+];
+
+const FORM_VACIO = {
+  idCar: "",
+  marca: "",
+  modelo: "",
+  precio: "",
+  img: "/assets/lambo.jpg",
+  desc: "",
+};
 
 function Admin() {
   const navigate = useNavigate();
-  const [listaAutos, setListaAutos] = useState<Auto[]>([]);
-  const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
-  const [idCar, setIdCar] = useState("");
-  const [marca, setMarca] = useState("");
-  const [modelo, setModelo] = useState("");
-  const [precio, setPrecio] = useState<number | "">("");
-  const [img, setImg] = useState("/assets/lambo.jpg");
-  const [desc, setDesc] = useState("");
+  const [autos, setAutos] = useState<Auto[]>(() => {
+    const guardados = localStorage.getItem("catalogoAutos");
+    return guardados ? JSON.parse(guardados) : vehiculos;
+  });
+  const [mostrarForm, setMostrarForm] = useState(false);
+  const [form, setForm] = useState(FORM_VACIO);
+  const [errores, setErrores] = useState<Record<string, string>>({});
 
-  const reservasEjemplo: ReservaAdmin[] = [
-    {
-      id: "001",
-      cliente: "Carlos Pérez",
-      vehiculo: "Mercedes-Benz Clase S",
-      estado: "Confirmado",
-      badgeClase: "bg-success",
-    },
-    {
-      id: "002",
-      cliente: "María Gómez",
-      vehiculo: "Lamborghini Huracán",
-      estado: "Pendiente",
-      badgeClase: "bg-warning text-dark",
-    },
-  ];
-
+  // Solo el administrador puede entrar
   useEffect(() => {
-    const rol = localStorage.getItem("rolUsuario");
-    if (rol !== "admin") {
+    if (localStorage.getItem("rolUsuario") !== "admin") {
       alert("Acceso denegado. Debes identificarte como Administrador.");
       navigate("/login");
-      return;
-    }
-
-    const guardados = localStorage.getItem("catalogoAutos");
-    if (guardados) {
-      setListaAutos(JSON.parse(guardados));
-    } else {
-      setListaAutos(datosBase);
-      localStorage.setItem("catalogoAutos", JSON.stringify(datosBase));
     }
   }, [navigate]);
 
-  const handleGuardarAuto = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!idCar || !marca || !modelo || !precio) {
-      alert("Por favor completa los campos del vehículo.");
-      return;
-    }
-
-    const nuevoAuto: Auto = {
-      id: idCar.toLowerCase().trim(),
-      nombre: `${marca} ${modelo}`,
-      precio: Number(precio),
-      desc: desc || "Vehículo de alta gama disponible para arriendo.",
-      img: img,
-    };
-
-    const actualizados = [...listaAutos, nuevoAuto];
-    setListaAutos(actualizados);
-    localStorage.setItem("catalogoAutos", JSON.stringify(actualizados));
-    alert("¡Vehículo agregado al catálogo con éxito!");
-
-    // Limpiar formulario y ocultar
-    setIdCar("");
-    setMarca("");
-    setModelo("");
-    setPrecio("");
-    setDesc("");
-    setMostrarFormulario(false);
+  // Un solo handler para todos los campos (usa el atributo "name")
+  const cambiar = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    setErrores({ ...errores, [e.target.name]: "" });
   };
 
-  const handleEliminar = (id: string, nombre: string) => {
-    if (window.confirm(`¿Deseas eliminar el vehículo "${nombre}"?`)) {
-      const filtrados = listaAutos.filter((a) => a.id !== id);
-      setListaAutos(filtrados);
-      localStorage.setItem("catalogoAutos", JSON.stringify(filtrados));
+  const claseInput = (campo: string) =>
+    `form-control bg-black text-white border-secondary ${errores[campo] ? "is-invalid" : ""}`;
+
+  // Actualiza la pantalla y localStorage a la vez
+  const actualizarAutos = (lista: Auto[]) => {
+    setAutos(lista);
+    localStorage.setItem("catalogoAutos", JSON.stringify(lista));
+  };
+
+  const handleGuardarAuto = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const resultado = validarFormulario(
+      form,
+      reglasAuto(autos.map((a) => a.id.toLowerCase())),
+    );
+    setErrores(resultado.errores);
+    if (!resultado.esValido) return;
+
+    actualizarAutos([
+      ...autos,
+      {
+        id: form.idCar.toLowerCase().trim(),
+        nombre: `${form.marca.trim()} ${form.modelo.trim()}`,
+        precio: Number(form.precio),
+        desc:
+          form.desc.trim() || "Vehículo de alta gama disponible para arriendo.",
+        img: form.img,
+      },
+    ]);
+    alert("¡Vehículo agregado al catálogo con éxito!");
+
+    setForm(FORM_VACIO);
+    setMostrarForm(false);
+  };
+
+  const handleEliminar = (auto: Auto) => {
+    if (window.confirm(`¿Deseas eliminar el vehículo "${auto.nombre}"?`)) {
+      actualizarAutos(autos.filter((a) => a.id !== auto.id));
     }
   };
 
@@ -102,7 +116,7 @@ function Admin() {
 
   return (
     <div className="container py-4 text-white">
-      {/* CABECERA ADMIN */}
+      {/* CABECERA */}
       <div className="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary gap-3">
         <div>
           <h2 className="text-warning fw-bold mb-0">Panel de Administración</h2>
@@ -113,9 +127,9 @@ function Admin() {
         <div className="d-flex gap-2">
           <Button
             clase="btn btn-warning fw-semibold btn-sm"
-            alHacerClic={() => setMostrarFormulario(!mostrarFormulario)}
+            alHacerClic={() => setMostrarForm(!mostrarForm)}
           >
-            {mostrarFormulario ? "Ocultar Formulario" : "+ Agregar Vehículo"}
+            {mostrarForm ? "Ocultar Formulario" : "+ Agregar Vehículo"}
           </Button>
           <Link to="/" className="btn btn-outline-light btn-sm">
             Ver Tienda
@@ -129,150 +143,142 @@ function Admin() {
         </div>
       </div>
 
-      {/* MÉTRICAS DE HOMEADMIN.HTML */}
+      {/* MÉTRICAS */}
       <div className="row g-3 mb-4">
-        <div className="col-md-6">
-          <div className="card bg-dark border-secondary p-3 shadow-sm">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <span className="text-secondary small">
-                  Autos en Inventario
-                </span>
-                <h3 className="text-white mt-1 mb-0">{listaAutos.length}</h3>
+        {[
+          { titulo: "Autos en Inventario", valor: autos.length, icono: "🚗" },
+          { titulo: "Clientes Registrados", valor: 42, icono: "👥" },
+        ].map((m) => (
+          <div className="col-md-6" key={m.titulo}>
+            <div className="card bg-dark border-secondary p-3 shadow-sm">
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <span className="text-secondary small">{m.titulo}</span>
+                  <h3 className="text-white mt-1 mb-0">{m.valor}</h3>
+                </div>
+                <span className="fs-1 text-warning">{m.icono}</span>
               </div>
-              <span className="fs-1 text-warning">🚗</span>
             </div>
           </div>
-        </div>
-        <div className="col-md-6">
-          <div className="card bg-dark border-secondary p-3 shadow-sm">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <span className="text-secondary small">
-                  Clientes Registrados
-                </span>
-                <h3 className="text-white mt-1 mb-0">42</h3>
-              </div>
-              <span className="fs-1 text-warning">👥</span>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* FORMULARIO DE PROCESOCATALOGOADMIN.HTML */}
-      {mostrarFormulario && (
+      {/* FORMULARIO NUEVO VEHÍCULO */}
+      {mostrarForm && (
         <div className="card bg-dark border-warning p-4 rounded-4 shadow mb-5">
           <h4 className="text-warning fw-bold mb-3">
             Datos del Nuevo Vehículo
           </h4>
-          <form onSubmit={handleGuardarAuto}>
+          <form onSubmit={handleGuardarAuto} noValidate>
             <div className="row g-3">
               <div className="col-md-6">
                 <label className="form-label text-light small">
                   ID del Vehículo
                 </label>
                 <input
+                  name="idCar"
                   type="text"
-                  required
                   placeholder="ej: audia4"
-                  className="form-control bg-black text-white border-secondary"
-                  value={idCar}
-                  onChange={(e) => setIdCar(e.target.value)}
+                  className={claseInput("idCar")}
+                  value={form.idCar}
+                  onChange={cambiar}
                 />
+                {errores.idCar && (
+                  <div className="invalid-feedback">{errores.idCar}</div>
+                )}
               </div>
+
               <div className="col-md-6">
                 <label className="form-label text-light small">Marca</label>
                 <input
+                  name="marca"
                   type="text"
-                  required
                   placeholder="ej: Audi"
-                  className="form-control bg-black text-white border-secondary"
-                  value={marca}
-                  onChange={(e) => setMarca(e.target.value)}
+                  className={claseInput("marca")}
+                  value={form.marca}
+                  onChange={cambiar}
                 />
+                {errores.marca && (
+                  <div className="invalid-feedback">{errores.marca}</div>
+                )}
               </div>
+
               <div className="col-md-6">
                 <label className="form-label text-light small">Modelo</label>
                 <input
+                  name="modelo"
                   type="text"
-                  required
                   placeholder="ej: A4 Sportback"
-                  className="form-control bg-black text-white border-secondary"
-                  value={modelo}
-                  onChange={(e) => setModelo(e.target.value)}
+                  className={claseInput("modelo")}
+                  value={form.modelo}
+                  onChange={cambiar}
                 />
+                {errores.modelo && (
+                  <div className="invalid-feedback">{errores.modelo}</div>
+                )}
               </div>
+
               <div className="col-md-6">
                 <label className="form-label text-light small">
                   Precio Diario ($)
                 </label>
                 <input
+                  name="precio"
                   type="number"
-                  required
-                  min={1000}
                   placeholder="ej: 350000"
-                  className="form-control bg-black text-white border-secondary"
-                  value={precio}
-                  onChange={(e) =>
-                    setPrecio(
-                      e.target.value === "" ? "" : Number(e.target.value),
-                    )
-                  }
+                  className={claseInput("precio")}
+                  value={form.precio}
+                  onChange={cambiar}
                 />
+                {errores.precio && (
+                  <div className="invalid-feedback">{errores.precio}</div>
+                )}
               </div>
+
               <div className="col-md-6">
                 <label className="form-label text-light small">
                   Seleccionar Foto
                 </label>
                 <select
+                  name="img"
                   className="form-select bg-black text-white border-secondary"
-                  value={img}
-                  onChange={(e) => setImg(e.target.value)}
+                  value={form.img}
+                  onChange={cambiar}
                 >
-                  <option value="/assets/mercedes.jpeg">
-                    Mercedes-Benz (/assets/mercedes.jpeg)
-                  </option>
-                  <option value="/assets/lambo.jpg">
-                    Lamborghini (/assets/lambo.jpg)
-                  </option>
-                  <option value="/assets/ferrari.jpg">
-                    Ferrari (/assets/ferrari.jpg)
-                  </option>
-                  <option value="/assets/rollsRoyce.jpg">
-                    Rolls Royce (/assets/rollsRoyce.jpg)
-                  </option>
-                  <option value="/assets/Mclarenjpg.jpg">
-                    McLaren (/assets/Mclarenjpg.jpg)
-                  </option>
-                  <option value="/assets/bugatti.jpg">
-                    Bugatti (/assets/bugatti.jpg)
-                  </option>
+                  {FOTOS.map((foto) => (
+                    <option key={foto.ruta} value={foto.ruta}>
+                      {foto.nombre} ({foto.ruta})
+                    </option>
+                  ))}
                 </select>
               </div>
+
               <div className="col-md-6">
                 <label className="form-label text-light small">
                   Especificaciones / Detalles
                 </label>
                 <input
+                  name="desc"
                   type="text"
                   placeholder="Transmisión, motor, etc."
-                  className="form-control bg-black text-white border-secondary"
-                  value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
+                  className={claseInput("desc")}
+                  value={form.desc}
+                  onChange={cambiar}
                 />
+                {errores.desc && (
+                  <div className="invalid-feedback">{errores.desc}</div>
+                )}
               </div>
             </div>
+
             <div className="mt-4 d-flex justify-content-end gap-2">
               <Button
                 clase="btn btn-outline-secondary"
-                alHacerClic={() => setMostrarFormulario(false)}
+                alHacerClic={() => setMostrarForm(false)}
               >
                 Cancelar
               </Button>
-              <Button
-                clase="btn btn-warning fw-bold text-dark"
-                alHacerClic={() => {}}
-              >
+              <Button tipo="submit" clase="btn btn-warning fw-bold text-dark">
                 Confirmar Nuevo Vehículo
               </Button>
             </div>
@@ -280,10 +286,10 @@ function Admin() {
         </div>
       )}
 
-      {/* CATÁLOGO DE AUTOS CON COMPONENTE TARJETA */}
+      {/* CATÁLOGO */}
       <h4 className="text-warning fw-bold mb-3">Catálogo de Flota</h4>
       <div className="row g-4 mb-5">
-        {listaAutos.map((auto) => (
+        {autos.map((auto) => (
           <div className="col-md-4 d-flex justify-content-center" key={auto.id}>
             <Tarjeta
               titulo={auto.nombre}
@@ -307,7 +313,7 @@ function Admin() {
                 </Link>
                 <Button
                   clase="btn btn-outline-danger btn-sm"
-                  alHacerClic={() => handleEliminar(auto.id, auto.nombre)}
+                  alHacerClic={() => handleEliminar(auto)}
                 >
                   Eliminar
                 </Button>
@@ -317,7 +323,7 @@ function Admin() {
         ))}
       </div>
 
-      {/* TABLA DE ÚLTIMAS RESERVAS (HOMEADMIN.HTML) */}
+      {/* ÚLTIMAS RESERVAS */}
       <div className="card bg-dark border-secondary p-4 rounded-4 shadow-sm">
         <h5 className="text-warning fw-bold mb-3">
           Últimas Reservas Registradas
@@ -333,15 +339,13 @@ function Admin() {
               </tr>
             </thead>
             <tbody>
-              {reservasEjemplo.map((res) => (
-                <tr key={res.id}>
-                  <td>{res.id}</td>
-                  <td>{res.cliente}</td>
-                  <td>{res.vehiculo}</td>
+              {RESERVAS.map((r) => (
+                <tr key={r.id}>
+                  <td>{r.id}</td>
+                  <td>{r.cliente}</td>
+                  <td>{r.vehiculo}</td>
                   <td>
-                    <span className={`badge ${res.badgeClase}`}>
-                      {res.estado}
-                    </span>
+                    <span className={`badge ${r.badge}`}>{r.estado}</span>
                   </td>
                 </tr>
               ))}

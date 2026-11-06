@@ -1,5 +1,20 @@
-import Tarjeta from "../componets/Tarjeta";
 import { Link } from "react-router-dom";
+import Tarjeta from "../componets/Tarjeta";
+
+const CLIENTES = [
+  {
+    nombre: "Arturo Vidal",
+    texto:
+      "Excelente servicio y puntualidad. Los autos están impecables y la atención fue de primer nivel.",
+    img: "/assets/clienteContento.jpg",
+  },
+  {
+    nombre: "Paul Pogba",
+    texto:
+      "Una experiencia de conducción inolvidable. Vehículos en perfecto estado mecánico y estético.",
+    img: "/assets/clienteSatisfecho.jpg",
+  },
+];
 
 function Nosotros() {
   return (
@@ -15,39 +30,25 @@ function Nosotros() {
         </p>
       </div>
 
-      {/* RECOMENDACIONES DE CLIENTES */}
       <h4 className="text-center fw-bold mb-4">
         Clientes que Recomiendan el Servicio
       </h4>
       <div className="row g-4 justify-content-center text-center mb-5">
-        {/* Arturo Vidal */}
-        <div className="col-md-5">
-          <Tarjeta
-            titulo="Arturo Vidal"
-            texto="Excelente servicio y puntualidad. Los autos están impecables y la atención fue de primer nivel."
-            urlImagen="/assets/clienteContento.jpg"
-            altImagen="Arturo Vidal"
-            clase="card bg-dark text-white border-secondary h-100 shadow-sm"
-          >
-            <span className="text-warning fs-5">⭐⭐⭐⭐⭐</span>
-          </Tarjeta>
-        </div>
-
-        {/* Paul Pogba */}
-        <div className="col-md-5">
-          <Tarjeta
-            titulo="Paul Pogba"
-            texto="Una experiencia de conducción inolvidable. Vehículos en perfecto estado mecánico y estético."
-            urlImagen="/assets/clienteSatisfecho.jpg"
-            altImagen="Paul Pogba"
-            clase="card bg-dark text-white border-secondary h-100 shadow-sm"
-          >
-            <span className="text-warning fs-5">⭐⭐⭐⭐⭐</span>
-          </Tarjeta>
-        </div>
+        {CLIENTES.map((cliente) => (
+          <div className="col-md-5" key={cliente.nombre}>
+            <Tarjeta
+              titulo={cliente.nombre}
+              texto={cliente.texto}
+              urlImagen={cliente.img}
+              altImagen={cliente.nombre}
+              clase="card bg-dark text-white border-secondary h-100 shadow-sm"
+            >
+              <span className="text-warning fs-5">⭐⭐⭐⭐⭐</span>
+            </Tarjeta>
+          </div>
+        ))}
       </div>
 
-      {/* INFORMACIÓN DE CONTACTO */}
       <div
         className="card bg-dark border-secondary p-4 mx-auto text-center shadow-sm"
         style={{ maxWidth: "550px" }}

@@ -1,66 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../componets/Button";
 import Tarjeta from "../componets/Tarjeta";
-import { validarRutChileno } from "../utils/validaciones";
+import type { Auto } from "../data/Auto";
+import {
+  validarFormulario,
+  requerido,
+  minLargo,
+  esRut,
+  type Validador,
+} from "../utils/validaciones";
 
-interface ItemCarrito {
-  id: string;
-  nombre: string;
-  precio: number;
+interface ItemCarrito extends Auto {
   cantidad: number;
-  desc?: string;
-  img?: string;
+}
+
+// La tarjeta puede venir con espacios o guiones: se limpian antes de contar
+const tarjeta16: Validador = (v) =>
+  /^\d{16}$/.test(v.replace(/[\s-]/g, ""))
+    ? null
+    : "Ingrese un número de tarjeta válido de 16 dígitos.";
+
+const reglasPago = {
+  nombre: [requerido("El nombre"), minLargo(3, "El nombre")],
+  rut: [requerido("El RUT"), esRut],
+  tarjeta: [requerido("La tarjeta"), tarjeta16],
+};
+
+function leerCarrito(): ItemCarrito[] {
+  try {
+    return JSON.parse(localStorage.getItem("carritoCompras") || "[]");
+  } catch {
+    return [];
+  }
 }
 
 function Proceso() {
-  const [carrito, setCarrito] = useState<ItemCarrito[]>([]);
   const navigate = useNavigate();
-
-  // Estados de tus 3 campos
-  const [nombre, setNombre] = useState("");
-  const [rut, setRut] = useState("");
-  const [tarjeta, setTarjeta] = useState("");
-
-  // Mensajes de error para Bootstrap
-  const [errorNombre, setErrorNombre] = useState("");
-  const [errorRut, setErrorRut] = useState("");
-  const [errorTarjeta, setErrorTarjeta] = useState("");
-
-  const cargarCarrito = () => {
-    const data = localStorage.getItem("carritoCompras");
-    if (data) {
-      try {
-        setCarrito(JSON.parse(data));
-      } catch {
-        setCarrito([]);
-      }
-    } else {
-      setCarrito([]);
-    }
-  };
-
-  useEffect(() => {
-    cargarCarrito();
-  }, []);
-
-  const eliminarItem = (id: string) => {
-    const nuevoCarrito = carrito.filter((item) => item.id !== id);
-    localStorage.setItem("carritoCompras", JSON.stringify(nuevoCarrito));
-    setCarrito(nuevoCarrito);
-    window.dispatchEvent(new Event("storage"));
-  };
-
-  const vaciarCarrito = () => {
-    localStorage.removeItem("carritoCompras");
-    setCarrito([]);
-    window.dispatchEvent(new Event("storage"));
-  };
+  const [carrito, setCarrito] = useState<ItemCarrito[]>(leerCarrito);
+  const [form, setForm] = useState({ nombre: "", rut: "", tarjeta: "" });
+  const [errores, setErrores] = useState<Record<string, string>>({});
 
   const total = carrito.reduce(
-    (acc, item) => acc + item.precio * (item.cantidad || 1),
+    (suma, item) => suma + item.precio * item.cantidad,
     0,
   );
+
+  const cambiar = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    setErrores({ ...errores, [e.target.name]: "" });
+  };
+
+  const claseInput = (campo: string) =>
+    `form-control bg-black text-white border-secondary ${errores[campo] ? "is-invalid" : ""}`;
+
+  // Actualiza la pantalla y localStorage a la vez
+  const actualizarCarrito = (lista: ItemCarrito[]) => {
+    setCarrito(lista);
+    localStorage.setItem("carritoCompras", JSON.stringify(lista));
+  };
 
   const handlePagar = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,41 +68,14 @@ function Proceso() {
       return;
     }
 
-    let esValido = true;
-
-    // 1. Nombre mínimo 3 letras
-    if (nombre.trim().length < 3) {
-      setErrorNombre("Por favor ingrese el nombre completo del titular.");
-      esValido = false;
-    } else {
-      setErrorNombre("");
-    }
-
-    // 2. Validación de RUT usando la función importada de validaciones.ts
-    if (!validarRutChileno(rut)) {
-      setErrorRut(
-        "RUT inválido. Formato requerido: 12345678-9 o 12.345.678-K.",
-      );
-      esValido = false;
-    } else {
-      setErrorRut("");
-    }
-
-    // 3. Tarjeta de 16 dígitos numéricos
-    const digitosTarjeta = tarjeta.replace(/[\s-]/g, "");
-    if (digitosTarjeta.length !== 16 || !/^[0-9]+$/.test(digitosTarjeta)) {
-      setErrorTarjeta("Ingrese un número de tarjeta válido de 16 dígitos.");
-      esValido = false;
-    } else {
-      setErrorTarjeta("");
-    }
-
-    if (!esValido) return;
+    const resultado = validarFormulario(form, reglasPago);
+    setErrores(resultado.errores);
+    if (!resultado.esValido) return;
 
     alert(
-      `¡Reserva confirmada con éxito para ${nombre} (RUT: ${rut})!\nHemos enviado el comprobante a tu correo.`,
+      `¡Reserva confirmada con éxito para ${form.nombre} (RUT: ${form.rut})!\nHemos enviado el comprobante a tu correo.`,
     );
-    vaciarCarrito();
+    actualizarCarrito([]);
     navigate("/");
   };
 
@@ -115,7 +86,7 @@ function Proceso() {
       </h2>
 
       <div className="row g-4">
-        {/* LISTADO DE AUTOS USANDO COMPONENTES TARJETA Y BUTTON */}
+        {/* LISTADO DE AUTOS */}
         <div className="col-lg-7">
           <div className="card bg-dark border-secondary p-4 rounded-4 shadow-sm mb-4">
             <div className="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
@@ -125,7 +96,7 @@ function Proceso() {
               {carrito.length > 0 && (
                 <Button
                   clase="btn btn-outline-danger btn-sm"
-                  alHacerClic={vaciarCarrito}
+                  alHacerClic={() => actualizarCarrito([])}
                 >
                   Vaciar Reserva
                 </Button>
@@ -147,11 +118,8 @@ function Proceso() {
                   <div className="col-12" key={item.id}>
                     <Tarjeta
                       titulo={item.nombre}
-                      texto={
-                        item.desc ||
-                        "Vehículo exclusivo seleccionado para arriendo."
-                      }
-                      urlImagen={item.img || "/assets/lambo.jpg"}
+                      texto={item.desc}
+                      urlImagen={item.img}
                       altImagen={item.nombre}
                       clase="card bg-black text-white border-secondary h-100 shadow-sm"
                     >
@@ -163,14 +131,18 @@ function Proceso() {
                           </span>
                           <span className="text-warning fw-bold fs-6">
                             Subtotal: $
-                            {(
-                              item.precio * (item.cantidad || 1)
-                            ).toLocaleString("es-CL")}
+                            {(item.precio * item.cantidad).toLocaleString(
+                              "es-CL",
+                            )}
                           </span>
                         </div>
                         <Button
                           clase="btn btn-outline-danger btn-sm"
-                          alHacerClic={() => eliminarItem(item.id)}
+                          alHacerClic={() =>
+                            actualizarCarrito(
+                              carrito.filter((i) => i.id !== item.id),
+                            )
+                          }
                         >
                           Quitar
                         </Button>
@@ -203,19 +175,15 @@ function Proceso() {
                   Nombre del Titular
                 </label>
                 <input
+                  name="nombre"
                   type="text"
                   placeholder="Tu nombre completo"
-                  className={`form-control bg-black text-white border-secondary ${
-                    errorNombre ? "is-invalid" : ""
-                  }`}
-                  value={nombre}
-                  onChange={(e) => {
-                    setNombre(e.target.value);
-                    if (errorNombre) setErrorNombre("");
-                  }}
+                  className={claseInput("nombre")}
+                  value={form.nombre}
+                  onChange={cambiar}
                 />
-                {errorNombre && (
-                  <div className="invalid-feedback">{errorNombre}</div>
+                {errores.nombre && (
+                  <div className="invalid-feedback">{errores.nombre}</div>
                 )}
               </div>
 
@@ -224,18 +192,16 @@ function Proceso() {
                   RUT / Identificación
                 </label>
                 <input
+                  name="rut"
                   type="text"
                   placeholder="12.345.678-9"
-                  className={`form-control bg-black text-white border-secondary ${
-                    errorRut ? "is-invalid" : ""
-                  }`}
-                  value={rut}
-                  onChange={(e) => {
-                    setRut(e.target.value);
-                    if (errorRut) setErrorRut("");
-                  }}
+                  className={claseInput("rut")}
+                  value={form.rut}
+                  onChange={cambiar}
                 />
-                {errorRut && <div className="invalid-feedback">{errorRut}</div>}
+                {errores.rut && (
+                  <div className="invalid-feedback">{errores.rut}</div>
+                )}
               </div>
 
               <div className="mb-4">
@@ -243,20 +209,16 @@ function Proceso() {
                   Tarjeta de Crédito o Débito
                 </label>
                 <input
+                  name="tarjeta"
                   type="text"
                   maxLength={19}
                   placeholder="XXXX-XXXX-XXXX-XXXX"
-                  className={`form-control bg-black text-white border-secondary ${
-                    errorTarjeta ? "is-invalid" : ""
-                  }`}
-                  value={tarjeta}
-                  onChange={(e) => {
-                    setTarjeta(e.target.value);
-                    if (errorTarjeta) setErrorTarjeta("");
-                  }}
+                  className={claseInput("tarjeta")}
+                  value={form.tarjeta}
+                  onChange={cambiar}
                 />
-                {errorTarjeta && (
-                  <div className="invalid-feedback">{errorTarjeta}</div>
+                {errores.tarjeta && (
+                  <div className="invalid-feedback">{errores.tarjeta}</div>
                 )}
               </div>
 

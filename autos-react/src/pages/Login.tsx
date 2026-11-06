@@ -1,29 +1,39 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from "../componets/Button";
+import { validarFormulario, reglasLogin } from "../utils/validaciones";
 
 function Login() {
-  const [correo, setCorreo] = useState("");
-  const [password, setPassword] = useState("");
+  const [datos, setDatos] = useState({ correo: "", password: "" });
+  const [errores, setErrores] = useState<Record<string, string>>({});
   const navigate = useNavigate();
+
+  // Un solo handler para los dos inputs (usa el atributo "name")
+  const cambiar = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDatos({ ...datos, [e.target.name]: e.target.value });
+    setErrores({ ...errores, [e.target.name]: "" });
+  };
+
+  const claseInput = (campo: string) =>
+    `form-control bg-black text-white border-secondary ${errores[campo] ? "is-invalid" : ""}`;
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Si es la cuenta del Administrador:
-    if (correo === "admin@autos.cl" && password === "admin123") {
-      localStorage.setItem("rolUsuario", "admin");
-      alert("¡Acceso concedido! Entrando al Panel de Administración.");
-      navigate("/admin");
-      return;
-    }
-    // 2. Si es un cliente común:
-    if (correo && password) {
-      localStorage.setItem("rolUsuario", "cliente");
-      alert(`Sesión iniciada con éxito.`);
-      navigate("/");
-      return;
-    }
-    alert("Por favor completa los campos.");
+    const resultado = validarFormulario(datos, reglasLogin);
+    setErrores(resultado.errores);
+    if (!resultado.esValido) return;
+
+    const esAdmin =
+      datos.correo === "admin@autos.cl" && datos.password === "admin123";
+    localStorage.setItem("rolUsuario", esAdmin ? "admin" : "cliente");
+
+    alert(
+      esAdmin
+        ? "¡Acceso concedido! Entrando al Panel de Administración."
+        : "Sesión iniciada con éxito.",
+    );
+    navigate(esAdmin ? "/admin" : "/");
   };
 
   return (
@@ -36,19 +46,22 @@ function Login() {
               Ingresa tus credenciales para continuar
             </p>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} noValidate>
               <div className="mb-3 text-start">
                 <label className="form-label text-light small">
                   Correo Electrónico
                 </label>
                 <input
+                  name="correo"
                   type="email"
-                  required
                   placeholder="admin@autos.cl"
-                  className="form-control bg-black text-white border-secondary"
-                  value={correo}
-                  onChange={(e) => setCorreo(e.target.value)}
+                  className={claseInput("correo")}
+                  value={datos.correo}
+                  onChange={cambiar}
                 />
+                {errores.correo && (
+                  <div className="invalid-feedback">{errores.correo}</div>
+                )}
               </div>
 
               <div className="mb-4 text-start">
@@ -56,21 +69,24 @@ function Login() {
                   Contraseña
                 </label>
                 <input
+                  name="password"
                   type="password"
-                  required
                   placeholder="admin123"
-                  className="form-control bg-black text-white border-secondary"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  className={claseInput("password")}
+                  value={datos.password}
+                  onChange={cambiar}
                 />
+                {errores.password && (
+                  <div className="invalid-feedback">{errores.password}</div>
+                )}
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-warning w-100 py-2 fw-bold text-dark mb-3"
+              <Button
+                tipo="submit"
+                clase="btn btn-warning w-100 py-2 fw-bold text-dark mb-3"
               >
                 Ingresar
-              </button>
+              </Button>
 
               <div className="p-2 border border-secondary rounded bg-black text-secondary small mb-3">
                 <span className="text-warning fw-bold">

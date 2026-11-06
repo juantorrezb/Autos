@@ -1,20 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import Button from "../componets/Button";
 import Contenedor from "../componets/Contenedor";
-import { vehiculos as datosBase, type Auto } from "../data/Auto";
-
-interface ProductoParams {
-  id: string;
-  [key: string]: string | undefined;
-}
+import { vehiculos, type Auto } from "../data/Auto";
 
 function Detalle() {
-  const { id } = useParams<ProductoParams>();
+  const { id } = useParams();
 
-  // Busca en los autos guardados o en los base
+  // Busca en el catálogo guardado o en el base
   const guardados = localStorage.getItem("catalogoAutos");
-  const lista: Auto[] = guardados ? JSON.parse(guardados) : datosBase;
-  const auto = lista.find((p) => p.id === id);
+  const lista: Auto[] = guardados ? JSON.parse(guardados) : vehiculos;
+  const auto = lista.find((a) => a.id === id);
 
   if (!auto) {
     return (
@@ -27,19 +22,14 @@ function Detalle() {
     );
   }
 
-  const handleAgregar = () => {
-    const data = localStorage.getItem("carritoCompras");
-    const carrito = data ? JSON.parse(data) : [];
+  const agregar = () => {
+    const carrito = JSON.parse(localStorage.getItem("carritoCompras") || "[]");
+    const existe = carrito.find((item: Auto) => item.id === auto.id);
 
-    const existe = carrito.find((item: any) => item.id === auto.id);
-    if (existe) {
-      existe.cantidad = (existe.cantidad || 1) + 1;
-    } else {
-      carrito.push({ ...auto, cantidad: 1 });
-    }
+    if (existe) existe.cantidad += 1;
+    else carrito.push({ ...auto, cantidad: 1 });
 
     localStorage.setItem("carritoCompras", JSON.stringify(carrito));
-    window.dispatchEvent(new Event("storage"));
     alert(`¡${auto.nombre} añadido al carrito!`);
   };
 
@@ -50,6 +40,7 @@ function Detalle() {
           ⬅️ Volver a la Tienda
         </Link>
       </div>
+
       <div className="row g-4 align-items-center">
         <div className="col-md-6">
           <img
@@ -59,6 +50,7 @@ function Detalle() {
             style={{ maxHeight: "420px", objectFit: "cover" }}
           />
         </div>
+
         <div className="col-md-6">
           <span className="badge bg-secondary mb-2">ID: {auto.id}</span>
           <h1 className="text-warning fw-bold">{auto.nombre}</h1>
@@ -67,14 +59,14 @@ function Detalle() {
             ${auto.precio.toLocaleString("es-CL")}{" "}
             <small className="text-secondary fs-6">/ día</small>
           </h3>
+
           <div className="d-flex gap-2">
             <Button
               clase="btn btn-warning fw-semibold px-4 py-2"
-              alHacerClic={handleAgregar}
+              alHacerClic={agregar}
             >
               🛒 Añadir al carrito
             </Button>
-            {/* Enlace corregido a /proceso sin el .html */}
             <Link to="/proceso" className="btn btn-outline-light px-4 py-2">
               Ir a Pagar
             </Link>
