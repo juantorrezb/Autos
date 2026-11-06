@@ -16,7 +16,6 @@ function Login() {
       navigate("/admin");
       return;
     }
-
     // 2. Si es un cliente común:
     if (correo && password) {
       localStorage.setItem("rolUsuario", "cliente");
@@ -24,7 +23,6 @@ function Login() {
       navigate("/");
       return;
     }
-
     alert("Por favor completa los campos.");
   };
 

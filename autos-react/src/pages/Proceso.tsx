@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../componets/Button";
 import Tarjeta from "../componets/Tarjeta";
+import { validarRutChileno } from "../utils/validaciones";
 
 interface ItemCarrito {
   id: string;
@@ -15,6 +16,16 @@ interface ItemCarrito {
 function Proceso() {
   const [carrito, setCarrito] = useState<ItemCarrito[]>([]);
   const navigate = useNavigate();
+
+  // Estados de tus 3 campos
+  const [nombre, setNombre] = useState("");
+  const [rut, setRut] = useState("");
+  const [tarjeta, setTarjeta] = useState("");
+
+  // Mensajes de error para Bootstrap
+  const [errorNombre, setErrorNombre] = useState("");
+  const [errorRut, setErrorRut] = useState("");
+  const [errorTarjeta, setErrorTarjeta] = useState("");
 
   const cargarCarrito = () => {
     const data = localStorage.getItem("carritoCompras");
@@ -53,12 +64,45 @@ function Proceso() {
 
   const handlePagar = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (carrito.length === 0) {
       alert("No hay vehículos en la reserva.");
       return;
     }
+
+    let esValido = true;
+
+    // 1. Nombre mínimo 3 letras
+    if (nombre.trim().length < 3) {
+      setErrorNombre("Por favor ingrese el nombre completo del titular.");
+      esValido = false;
+    } else {
+      setErrorNombre("");
+    }
+
+    // 2. Validación de RUT usando la función importada de validaciones.ts
+    if (!validarRutChileno(rut)) {
+      setErrorRut(
+        "RUT inválido. Formato requerido: 12345678-9 o 12.345.678-K.",
+      );
+      esValido = false;
+    } else {
+      setErrorRut("");
+    }
+
+    // 3. Tarjeta de 16 dígitos numéricos
+    const digitosTarjeta = tarjeta.replace(/[\s-]/g, "");
+    if (digitosTarjeta.length !== 16 || !/^[0-9]+$/.test(digitosTarjeta)) {
+      setErrorTarjeta("Ingrese un número de tarjeta válido de 16 dígitos.");
+      esValido = false;
+    } else {
+      setErrorTarjeta("");
+    }
+
+    if (!esValido) return;
+
     alert(
-      "¡Reserva confirmada con éxito! Te hemos enviado el comprobante a tu correo.",
+      `¡Reserva confirmada con éxito para ${nombre} (RUT: ${rut})!\nHemos enviado el comprobante a tu correo.`,
     );
     vaciarCarrito();
     navigate("/");
@@ -139,7 +183,7 @@ function Proceso() {
           </div>
         </div>
 
-        {/* RESUMEN Y PAGO USANDO COMPONENTE BUTTON */}
+        {/* RESUMEN Y FORMULARIO DE PAGO */}
         <div className="col-lg-5">
           <div className="card bg-dark border-secondary p-4 rounded-4 shadow-sm">
             <h5 className="text-warning fw-bold mb-3 border-bottom border-secondary pb-2">
@@ -153,17 +197,26 @@ function Proceso() {
               </span>
             </div>
 
-            <form onSubmit={handlePagar}>
+            <form onSubmit={handlePagar} noValidate>
               <div className="mb-3">
                 <label className="form-label text-light small">
                   Nombre del Titular
                 </label>
                 <input
                   type="text"
-                  required
                   placeholder="Tu nombre completo"
-                  className="form-control bg-black text-white border-secondary"
+                  className={`form-control bg-black text-white border-secondary ${
+                    errorNombre ? "is-invalid" : ""
+                  }`}
+                  value={nombre}
+                  onChange={(e) => {
+                    setNombre(e.target.value);
+                    if (errorNombre) setErrorNombre("");
+                  }}
                 />
+                {errorNombre && (
+                  <div className="invalid-feedback">{errorNombre}</div>
+                )}
               </div>
 
               <div className="mb-3">
@@ -172,10 +225,17 @@ function Proceso() {
                 </label>
                 <input
                   type="text"
-                  required
                   placeholder="12.345.678-9"
-                  className="form-control bg-black text-white border-secondary"
+                  className={`form-control bg-black text-white border-secondary ${
+                    errorRut ? "is-invalid" : ""
+                  }`}
+                  value={rut}
+                  onChange={(e) => {
+                    setRut(e.target.value);
+                    if (errorRut) setErrorRut("");
+                  }}
                 />
+                {errorRut && <div className="invalid-feedback">{errorRut}</div>}
               </div>
 
               <div className="mb-4">
@@ -185,15 +245,24 @@ function Proceso() {
                 <input
                   type="text"
                   maxLength={19}
-                  required
                   placeholder="XXXX-XXXX-XXXX-XXXX"
-                  className="form-control bg-black text-white border-secondary"
+                  className={`form-control bg-black text-white border-secondary ${
+                    errorTarjeta ? "is-invalid" : ""
+                  }`}
+                  value={tarjeta}
+                  onChange={(e) => {
+                    setTarjeta(e.target.value);
+                    if (errorTarjeta) setErrorTarjeta("");
+                  }}
                 />
+                {errorTarjeta && (
+                  <div className="invalid-feedback">{errorTarjeta}</div>
+                )}
               </div>
 
               <Button
+                tipo="submit"
                 clase="btn btn-warning w-100 py-2 fw-bold text-dark shadow"
-                alHacerClic={() => {}}
               >
                 Confirmar y Pagar
               </Button>
