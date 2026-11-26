@@ -13,7 +13,7 @@ public class AutoService {
     @Autowired
     private AutoRepository autoRepository;
 
-    //Reglas de negoccio
+    //Reglas de negocio
 
     //Listar todos los autos
     public List<Auto> obtenerTodos(){
@@ -51,5 +51,11 @@ public class AutoService {
             throw new RuntimeException("Producto no encontrado con id: " + id);
         // Si lo encontre lo elimino
         autoRepository.deleteById(id);
+    }
+
+    //Obtener por id
+    public Auto ObtenerPorId (Long id){
+        return autoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + id));
+
     }
 }
