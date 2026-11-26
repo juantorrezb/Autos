@@ -1,0 +1,26 @@
+[33mcommit 1fabd3d573277ed56a1f26f42b4e0eabe4ab7309[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mBackend[m[33m, [m[1;31morigin/Backend[m[33m)[m
+Author: Servicios Digitales Concepcion <cetecom_conce@duoc.cl>
+Date:   Thu Nov 26 14:13:16 2026 -0300
+
+    Implementa Cliente y Admin completos
+
+ .../com/Autos/backend/repository/ClienteRepository.java    | 14 [32m++++++++++++++[m
+ 1 file changed, 14 insertions(+)
+
+[33mcommit f3d45622150343fac90723c788f3c9a5afbd6ebd[m
+Author: Servicios Digitales Concepcion <cetecom_conce@duoc.cl>
+Date:   Thu Nov 26 13:58:45 2026 -0300
+
+    ms admin
+
+ .../com/Autos/backend/service/{AdminSerive.java => AdminService.java}     | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit f84b6160ebbd889120367d4169c0584b913f688a[m
+Author: Servicios Digitales Concepcion <cetecom_conce@duoc.cl>
+Date:   Thu Nov 26 13:50:15 2026 -0300
+
+    ms Cliente
+
+ .../src/main/java/com/Autos/backend/model/{Usuario.java => Cliente.java}  | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
