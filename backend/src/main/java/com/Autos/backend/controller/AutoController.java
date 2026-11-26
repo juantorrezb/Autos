@@ -27,6 +27,11 @@ public class AutoController {
     public List<Auto> listaProductos(){
         return autoService.obtenerTodos();
     }
+        //Endpoint tipo GET con id
+    @GetMapping("/{id}")
+    public Auto obtenerPorId(@PathVariable Long id){
+        return autoService.ObtenerPorId(id);
+    }
     //Endpoint tipo POST
     @PostMapping
     public Auto creaProducto(@RequestBody Auto producto){
