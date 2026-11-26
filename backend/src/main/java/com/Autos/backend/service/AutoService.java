@@ -58,4 +58,23 @@ public class AutoService {
         return autoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + id));
 
     }
+
+    //Actualizacion de un dato previamente guardado
+    public Auto actualizar(Long id, Auto nuevosDatos){
+        // Primero nos aseguramos que el Auto exista en la BD
+        Auto auto = ObtenerPorId(id);
+
+        if(nuevosDatos.getNombre() != null && nuevosDatos.getNombre().trim().isEmpty() == false)
+            auto.setNombre(nuevosDatos.getNombre());
+
+        if(nuevosDatos.getDescripcion() != null && nuevosDatos.getDescripcion().trim().isEmpty() == false)
+            auto.setDescripcion(nuevosDatos.getDescripcion());
+
+        if(nuevosDatos.getPrecio() > 0f || auto.getPrecio() != null)
+            auto.setPrecio(nuevosDatos.getPrecio());
+
+        //Si ya estoy listo con las modificaciones indicadas
+        //guardo el auto
+        return autoRepository.save(auto);
+    }
 }
