@@ -8,9 +8,9 @@ import com.Autos.backend.model.Rol;
 import com.Autos.backend.repository.RolRepository;
 
 // [FASE 5] Descomentar estos 3 imports cuando Spring Security esté configurado
-// import com.telovendo.backend.model.Usuario;
-// import com.telovendo.backend.repository.UsuarioRepository;
-// import org.springframework.security.crypto.password.PasswordEncoder;
+import com.Autos.backend.model.Usuario;
+ import com.Autos.backend.repository.UsuarioRepository;
+ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -18,16 +18,17 @@ public class DataInitializer implements CommandLineRunner {
     private final RolRepository rolRepository;
 
     // [FASE 5] Descomentar estos 2 atributos
-    // private final UsuarioRepository usuarioRepository;
-    // private final PasswordEncoder passwordEncoder;
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // [FASE 1] Comentar este constructor al pasar a la Fase 5
+    /* 
     public DataInitializer(RolRepository rolRepository) {
         this.rolRepository = rolRepository;
-    }
+    }*/
 
     // [FASE 5] Descomentar este constructor (y comentar el de arriba)
-    /*
+    
     public DataInitializer(
             RolRepository rolRepository,
             UsuarioRepository usuarioRepository,
@@ -37,7 +38,7 @@ public class DataInitializer implements CommandLineRunner {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
     }
-    */
+    
 
     @Override
     public void run(String... args) {
@@ -46,7 +47,7 @@ public class DataInitializer implements CommandLineRunner {
         Rol rolAdmin = crearRolSiNoExiste("ROLE_ADMIN");
 
         // [FASE 5] Descomentar este bloque para crear el usuario ADMIN de prueba
-        /*
+        
         if (!usuarioRepository.existsByCorreo("admin@tuproyecto.cl")) {
             Usuario admin = new Usuario(
                     "Administrador",
@@ -57,7 +58,7 @@ public class DataInitializer implements CommandLineRunner {
             admin.getRoles().add(rolAdmin);
             usuarioRepository.save(admin);
         }
-        */
+        
     }
 
     private Rol crearRolSiNoExiste(String nombre) {
