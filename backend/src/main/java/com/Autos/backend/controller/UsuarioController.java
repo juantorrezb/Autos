@@ -17,7 +17,7 @@ import com.Autos.backend.model.Usuario;
 import com.Autos.backend.service.UsuarioService;
 
 @RestController
-@RequestMapping("/api/Autos")
+@RequestMapping("/api/usuarios")
 @CrossOrigin(origins = "http://localhost:5173") // Permite peticiones desde React
 public class UsuarioController {
     @Autowired

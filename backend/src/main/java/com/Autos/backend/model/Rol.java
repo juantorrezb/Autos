@@ -1,11 +1,16 @@
 package com.Autos.backend.model;
 
-import org.springframework.data.annotation.Id;
+import org.hibernate.annotations.Audited.Table;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+@Table(name = "rol")
 public class Rol {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
