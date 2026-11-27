@@ -1,4 +1,4 @@
-package com.telovendo.backend.security;
+package com.Autos.backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
