@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Autos.backend.model.Auto;
 import com.Autos.backend.model.Usuario;
-import com.Autos.backend.service.AutoService;
 import com.Autos.backend.service.UsuarioService;
 
 @RestController
@@ -33,16 +31,16 @@ public class UsuarioController {
         //Endpoint tipo GET con id
     @GetMapping("/{id}")
     public Usuario obtenerPorId(@PathVariable Long id){
-        return usuarioService.ObtenerPorId(id);
+        return usuarioService.obtenerPorId(id);
     }
     //Endpoint tipo POST
     @PostMapping
     public Usuario creaProducto(@RequestBody Usuario producto){
-        return UsuarioService.guardar(producto);
+        return usuarioService.guardar(producto);
     }
     @PutMapping("/{id}")
     public Usuario actualizaProducto(@PathVariable Long id,@RequestBody Usuario nuevosDatos){
-        return UsuarioService.actualizar(id, nuevosDatos);
+        return usuarioService.actualizar(id, nuevosDatos);
     }
 
     @DeleteMapping
