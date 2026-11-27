@@ -6,22 +6,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Autos.backend.model.Cliente;
-import com.Autos.backend.repository.ClienteRepository;
+import com.Autos.backend.model.Usuario;
+import com.Autos.backend.repository.UsuarioRepository;
 
 @Service
-public class ClienteService {
+public class UsuarioService {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UsuarioRepository clienteRepository;
 
     // Listar todos los clientes
-    public List<Cliente> obtenerTodos() {
+    public List<Usuario> obtenerTodos() {
         return clienteRepository.findAll();
     }
 
     // Guardar / Registrar un nuevo cliente
-    public Cliente guardar(Cliente cliente) {
+    public Usuario guardar(Usuario cliente) {
         if (cliente == null)
             throw new IllegalArgumentException("El cliente no puede ser nulo");
 
@@ -37,27 +37,18 @@ public class ClienteService {
         if (cliente.getPassword().trim().length() < 6)
             throw new IllegalArgumentException("La contraseña debe tener al menos 6 caracteres");
 
-        if (cliente.getRol() == null || cliente.getRol().trim().isBlank()) {
-            cliente.setRol("cliente");
-        }
-
         cliente.setCorreo(cliente.getCorreo().trim());
 
         return clienteRepository.save(cliente);
     }
 
     // Autenticar cliente o administrador (Login)
-    public Cliente autenticar(String correo, String password) {
+    public Usuario autenticar(String correo, String password) {
         if (correo == null || correo.trim().isBlank() || password == null || password.trim().isBlank()) {
             return null;
         }
 
-        // Credencial fija de Administrador igual que en el frontend
-        if ("admin@autos.cl".equals(correo.trim()) && "admin123".equals(password)) {
-            return new Cliente("Administrador", "11111111-1", "admin@autos.cl", "", "admin");
-        }
-
-        Optional<Cliente> clienteOpt = clienteRepository.findByCorreo(correo.trim());
+        Optional<Usuario> clienteOpt = clienteRepository.findByCorreo(correo.trim());
         if (clienteOpt.isPresent() && clienteOpt.get().getPassword().equals(password)) {
             return clienteOpt.get();
         }
@@ -66,14 +57,14 @@ public class ClienteService {
     }
 
     // Obtener por id
-    public Cliente obtenerPorId(Long id) {
+    public Usuario obtenerPorId(Long id) {
         return clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con id: " + id));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
     }
 
     // Actualizar datos del cliente
-    public Cliente actualizar(Long id, Cliente nuevosDatos) {
-        Cliente cliente = obtenerPorId(id);
+    public Usuario actualizar(Long id, Usuario nuevosDatos) {
+        Usuario cliente = obtenerPorId(id);
 
         if (nuevosDatos.getNombre() != null && !nuevosDatos.getNombre().trim().isEmpty())
             cliente.setNombre(nuevosDatos.getNombre().trim());
@@ -87,16 +78,13 @@ public class ClienteService {
         if (nuevosDatos.getPassword() != null && !nuevosDatos.getPassword().trim().isEmpty())
             cliente.setPassword(nuevosDatos.getPassword());
 
-        if (nuevosDatos.getRol() != null && !nuevosDatos.getRol().trim().isEmpty())
-            cliente.setRol(nuevosDatos.getRol().trim());
-
         return clienteRepository.save(cliente);
     }
 
     // Eliminar cliente por id
     public void eliminar(Long id) {
         if (!clienteRepository.existsById(id))
-            throw new RuntimeException("Cliente no encontrado con id: " + id);
+            throw new RuntimeException("Usuario no encontrado con id: " + id);
 
         clienteRepository.deleteById(id);
     }
